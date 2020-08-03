@@ -7,7 +7,7 @@
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
     "start": "webpack-dev-server --mode development --open",
-    "scss": "sass --watch ./src/scss -o ./dist/css --recursive"
+    "scss": "node-sass --watch src/scss -o dist/css --recursive"
   },
   "author": "Wenrui",
   "license": "ISC",
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "firebase": "^7.17.1",
     "regenerator-runtime": "^0.13.7"
   }
 }

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <title>Welcome To Chatty</title>
+  </head>
+  <body>
+    <section id="login-wrapper">
+      <div id="landing">
+        <!-- Sign In -->
+        <div id="landing-sign-in">
+          <div class="sign-in-top">
+            <img
+              src="./assets/logo.png"
+              alt="chatty logo"
+              class="sign-in-logo"
+            />
+            <div class="sign-in-title">Welcome To Chatty</div>
+            <div class="sign-in-message">
+              Sign in with your email and password
+            </div>
+          </div>
+          <form action="">
+            <div class="sign-in-form-area">
+              <div class="group">
+                <input
+                  type="email"
+                  id="sign-in-email"
+                  name="sign-in-email"
+                  class="form-input sign-in-email-input"
+                />
+                <label for="sign-in-email" class="form-input-label">
+                  Email
+                </label>
+              </div>
+              <div class="group">
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-input sign-in-password-input"
+                />
+                <label for="sign-in-password" class="form-input-label"
+                  >Password</label
+                >
+              </div>
+
+              <button class="btn-main">SIGN IN</button>
+              <button id="google-sign-in" class="btn-google">
+                SIGN IN WITH GOOGLE
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Sign Up -->
+        <div id="landing-sign-up">
+          <div class="sign-up-top">
+            <div class="sign-up-title">Do not have an account?</div>
+            <div class="sign-up-message">Sign up with your email</div>
+          </div>
+          <form action="">
+            <div class="sign-up-form-area">
+              <div class="group">
+                <input
+                  type="text"
+                  id="sign-up-display-name"
+                  name="sign-up-display-name"
+                  class="form-input sign-up-display-name-input"
+                />
+                <label for="sign-up-display-name" class="form-input-label">
+                  Display Name
+                </label>
+              </div>
+              <div class="group">
+                <input
+                  type="email"
+                  id="sign-up-email"
+                  name="sign-up-email"
+                  class="form-input sign-up-email-input"
+                />
+                <label for="sign-up-email" class="form-input-label"
+                  >Email</label
+                >
+              </div>
+              <div class="group">
+                <input
+                  type="password"
+                  id="sign-up-password"
+                  name="sign-up-password"
+                  class="form-input sign-up-password-input"
+                />
+                <label for="sign-up-password" class="form-input-label"
+                  >Password</label
+                >
+              </div>
+              <div class="group">
+                <input
+                  type="password"
+                  id="sign-up-password-cfm"
+                  name="sign-up-password-cfm"
+                  class="form-input sign-up-password-cfm-input"
+                />
+                <label for="sign-up-password-cfm" class="form-input-label"
+                  >Confirm Password</label
+                >
+              </div>
+              <button class="btn-main">SIGN UP</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

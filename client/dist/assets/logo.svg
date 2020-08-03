@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="139.76999999999998" height="139.34369999999998" xml:space="preserve">
+<desc>Created with Fabric.js 1.6.0-rc.1</desc>
+<defs></defs>
+<g style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(10 10) scale(2.03 2.03)" >
+  <path d="M 0 16.207 c 0 -8.822 7.178 -16 16 -16 h 25 c 8.822 0 17 7.178 17 16 v 16 c 0 8.485 -7.644 15.429 -16 15.949 v -3.949 c 0 -0.553 -0.448 -1 -1 -1 s -1 0.447 -1 1 v 4 v 1 v 8.586 l -1.359 -1.359 c -5.306 -5.305 -12.359 -8.227 -19.86 -8.227 H 16 c -8.822 0 -16 -7.178 -16 -16 L 0 16.207 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #147ce3; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+</g>
+<g style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(31.990000000000013 25.360000000000014) scale(0.15 0.15)" >
+  <polygon points="223.9,183.85 112.17,183.88 163.45,4 376.7,4 315.5,214.6 396.03,214.6 137.26,497.03 " style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #fffff8; fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+  <path d="M 371.376 8 l -58.224 200.368 l -2.976 10.232 h 10.656 h 66.12 L 145.544 482.056 l 80.808 -292.08 l 2.808 -10.136 h -10.52 l -101.176 0.032 L 166.472 8 H 371.376 M 382.024 0 H 160.44 l -53.568 187.88 l 111.776 -0.032 L 128.96 512 l 276.168 -301.4 h -84.296 L 382.024 0 L 382.024 0 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #fffff8; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
+  <polygon points="166.72,0 379.07,0 357.25,55.93 145.9,55.93 " style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: #fffff8; fill-rule: nonzero; opacity: 1;" transform="  matrix(1 0 0 1 0 0) "/>
+</g>
+</svg>

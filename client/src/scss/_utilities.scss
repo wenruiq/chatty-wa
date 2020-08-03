@@ -1,0 +1,31 @@
+// Buttons
+%btn-shared {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  transition: all 0.5s;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn {
+  &-main {
+    @extend %btn-shared;
+    color: $light-color;
+    background-color: $main-color;
+
+    &:hover {
+      background-color: $dark-color;
+    }
+  }
+
+  &-google {
+    @extend %btn-shared;
+    color: white;
+    background-color: #4285f4;
+
+    &:hover {
+      background-color: #357ae8;
+    }
+  }
+}
