@@ -28,4 +28,21 @@
       background-color: #357ae8;
     }
   }
+
+  &-sign-up {
+    @extend %btn-shared;
+    color: $light-color;
+    background-color: $main-color;
+
+    &:hover {
+      background-color: #316ca5;
+    }
+  }
 }
+
+// Mixins
+@mixin shrinkLabel {
+  top: -20px;
+  font-size: 12px;
+}
+

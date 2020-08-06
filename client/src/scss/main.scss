@@ -13,29 +13,23 @@ body {
   color: #000;
 }
 
-// Login Page
-#login-wrapper {
-  background: $main-bg no-repeat center center/cover;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+// Login page
+#login {
+  // Main wrapper with bg
+  &-wrapper {
+    background: $main-bg no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-@mixin shrinkLabel {
-  top: -20px;
-  font-size: 12px;
-}
-
-@mixin shrinkLabel2 {
-  top: -20px;
-  font-size: 11px;
-}
-
-#landing {
-  display: flex;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
-  background: $light-color;
+  // Center box
+  &-box {
+    display: flex;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+    background: $light-color;
+  }
 
   // Sign in (left square)
   &-sign-in {
@@ -86,7 +80,7 @@ body {
         .form-input {
           background: none;
           background-color: $light-color;
-          color: #000;
+          color: $main-color;
           font-size: 20px;
           padding: 3px 3px;
           display: block;
@@ -177,7 +171,7 @@ body {
           }
 
           &:focus ~ .form-input-label {
-            @include shrinkLabel2();
+            @include shrinkLabel();
           }
         }
 
@@ -196,11 +190,11 @@ body {
           transition: 300ms ease all;
 
           &.shrink {
-            @include shrinkLabel2();
+            @include shrinkLabel();
           }
         }
       }
-      .btn-main {
+      .btn-sign-up {
         margin-top: 15px;
       }
     }

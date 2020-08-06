@@ -12,6 +12,35 @@ const config = {
   appId: '1:693027905253:web:55fb22096e2a00bf817e0c',
 };
 
+// Create user doc in firestore if first time login with google
+export const createUserDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return;
+
+  // Always get doc reference first
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+  // Then perform CRUD
+  const snapShot = await userRef.get();
+
+  if (!snapShot.exists) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+    } catch (err) {
+      console.log('error creating user', err.message);
+    }
+  }
+
+  return userRef;
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();

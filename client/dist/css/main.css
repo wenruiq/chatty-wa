@@ -1,4 +1,4 @@
-.btn-main, .btn-google {
+.btn-main, .btn-google, .btn-sign-up {
   display: inline-block;
   padding: 0.8rem 2rem;
   transition: all 0.5s;
@@ -18,6 +18,12 @@
   .btn-google:hover {
     background-color: #357ae8; }
 
+.btn-sign-up {
+  color: #e8eef5;
+  background-color: #1b5c9b; }
+  .btn-sign-up:hover {
+    background-color: #316ca5; }
+
 * {
   margin: 0;
   padding: 0;
@@ -35,123 +41,125 @@ body {
   justify-content: center;
   align-items: center; }
 
-#landing {
+#login-box {
   display: flex;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
   background: #e8eef5; }
-  #landing-sign-in {
-    padding: 2rem;
-    background: #e8eef5; }
-    #landing-sign-in .sign-in-top {
-      display: grid;
-      grid-template-areas: 'logo title' 'logo msg'; }
-      #landing-sign-in .sign-in-top .sign-in-logo {
-        grid-area: logo;
-        width: 152px;
-        height: 97px; }
-      #landing-sign-in .sign-in-top .sign-in-title {
-        grid-area: title;
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-        font-size: 1.9rem;
-        color: #0d2e4d;
-        padding-right: 2rem; }
-      #landing-sign-in .sign-in-top .sign-in-message {
-        grid-area: msg;
-        align-self: center;
+
+#login-sign-in {
+  padding: 2rem;
+  background: #e8eef5; }
+  #login-sign-in .sign-in-top {
+    display: grid;
+    grid-template-areas: 'logo title' 'logo msg'; }
+    #login-sign-in .sign-in-top .sign-in-logo {
+      grid-area: logo;
+      width: 152px;
+      height: 97px; }
+    #login-sign-in .sign-in-top .sign-in-title {
+      grid-area: title;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.9rem;
+      color: #0d2e4d;
+      padding-right: 2rem; }
+    #login-sign-in .sign-in-top .sign-in-message {
+      grid-area: msg;
+      align-self: center;
+      color: #1b5c9b;
+      padding-right: 2rem; }
+  #login-sign-in .sign-in-form-area {
+    background: #e8eef5;
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    padding: 0 2rem; }
+    #login-sign-in .sign-in-form-area .group {
+      position: relative;
+      margin: 30px 0; }
+      #login-sign-in .sign-in-form-area .group .form-input {
+        background: none;
+        background-color: #e8eef5;
         color: #1b5c9b;
-        padding-right: 2rem; }
-    #landing-sign-in .sign-in-form-area {
-      background: #e8eef5;
-      display: flex;
-      flex-direction: column;
-      margin: 15px 0;
-      padding: 0 2rem; }
-      #landing-sign-in .sign-in-form-area .group {
-        position: relative;
-        margin: 30px 0; }
-        #landing-sign-in .sign-in-form-area .group .form-input {
-          background: none;
-          background-color: #e8eef5;
-          color: #000;
-          font-size: 20px;
-          padding: 3px 3px;
-          display: block;
-          width: 100%;
-          border: none;
-          border-radius: 0;
-          border-bottom: 2px solid #1b5c9b; }
-          #landing-sign-in .sign-in-form-area .group .form-input:focus {
-            outline: none; }
-          #landing-sign-in .sign-in-form-area .group .form-input:focus ~ .form-input-label {
-            top: -20px;
-            font-size: 12px; }
-        #landing-sign-in .sign-in-form-area .group input[type='password'] {
-          letter-spacing: 0.3rem; }
-        #landing-sign-in .sign-in-form-area .group .form-input-label {
-          color: #769dc3;
-          font-size: 16px;
-          font-weight: normal;
-          position: absolute;
-          pointer-events: none;
-          left: 3px;
-          top: 5px;
-          transition: 300ms ease all; }
-          #landing-sign-in .sign-in-form-area .group .form-input-label.shrink {
-            top: -20px;
-            font-size: 12px; }
-      #landing-sign-in .sign-in-form-area .btn-main {
-        margin: 15px 0 25px 0; }
-  #landing-sign-up {
+        font-size: 20px;
+        padding: 3px 3px;
+        display: block;
+        width: 100%;
+        border: none;
+        border-radius: 0;
+        border-bottom: 2px solid #1b5c9b; }
+        #login-sign-in .sign-in-form-area .group .form-input:focus {
+          outline: none; }
+        #login-sign-in .sign-in-form-area .group .form-input:focus ~ .form-input-label {
+          top: -20px;
+          font-size: 12px; }
+      #login-sign-in .sign-in-form-area .group input[type='password'] {
+        letter-spacing: 0.3rem; }
+      #login-sign-in .sign-in-form-area .group .form-input-label {
+        color: #769dc3;
+        font-size: 16px;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 3px;
+        top: 5px;
+        transition: 300ms ease all; }
+        #login-sign-in .sign-in-form-area .group .form-input-label.shrink {
+          top: -20px;
+          font-size: 12px; }
+    #login-sign-in .sign-in-form-area .btn-main {
+      margin: 15px 0 25px 0; }
+
+#login-sign-up {
+  background: #0d2e4d;
+  padding: 40px 5rem; }
+  #login-sign-up .sign-up-top {
+    display: flex;
+    flex-direction: column; }
+    #login-sign-up .sign-up-top .sign-up-title {
+      font-size: 1.9rem;
+      color: #e8eef5;
+      margin-bottom: 20px; }
+    #login-sign-up .sign-up-top .sign-up-message {
+      color: #e8eef5; }
+  #login-sign-up .sign-up-form-area {
     background: #0d2e4d;
-    padding: 40px 5rem; }
-    #landing-sign-up .sign-up-top {
-      display: flex;
-      flex-direction: column; }
-      #landing-sign-up .sign-up-top .sign-up-title {
-        font-size: 1.9rem;
-        color: #e8eef5;
-        margin-bottom: 20px; }
-      #landing-sign-up .sign-up-top .sign-up-message {
-        color: #e8eef5; }
-    #landing-sign-up .sign-up-form-area {
-      background: #0d2e4d;
-      display: flex;
-      flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px; }
+    #login-sign-up .sign-up-form-area .group {
+      position: relative;
+      margin: 25px 0; }
+      #login-sign-up .sign-up-form-area .group .form-input {
+        background: none;
+        background-color: #0d2e4d;
+        color: #fff;
+        font-size: 18px;
+        padding: 3px 3px;
+        display: block;
+        width: 100%;
+        border: none;
+        border-radius: 0;
+        border-bottom: 1px solid #e8eef5; }
+        #login-sign-up .sign-up-form-area .group .form-input:focus {
+          outline: none; }
+        #login-sign-up .sign-up-form-area .group .form-input:focus ~ .form-input-label {
+          top: -20px;
+          font-size: 12px; }
+      #login-sign-up .sign-up-form-area .group input[type='password'] {
+        letter-spacing: 0.3rem; }
+      #login-sign-up .sign-up-form-area .group .form-input-label {
+        color: #769dc3;
+        font-size: 16px;
+        font-weight: normal;
+        position: absolute;
+        pointer-events: none;
+        left: 3px;
+        top: 5px;
+        transition: 300ms ease all; }
+        #login-sign-up .sign-up-form-area .group .form-input-label.shrink {
+          top: -20px;
+          font-size: 12px; }
+    #login-sign-up .sign-up-form-area .btn-sign-up {
       margin-top: 15px; }
-      #landing-sign-up .sign-up-form-area .group {
-        position: relative;
-        margin: 25px 0; }
-        #landing-sign-up .sign-up-form-area .group .form-input {
-          background: none;
-          background-color: #0d2e4d;
-          color: #fff;
-          font-size: 18px;
-          padding: 3px 3px;
-          display: block;
-          width: 100%;
-          border: none;
-          border-radius: 0;
-          border-bottom: 1px solid #e8eef5; }
-          #landing-sign-up .sign-up-form-area .group .form-input:focus {
-            outline: none; }
-          #landing-sign-up .sign-up-form-area .group .form-input:focus ~ .form-input-label {
-            top: -20px;
-            font-size: 11px; }
-        #landing-sign-up .sign-up-form-area .group input[type='password'] {
-          letter-spacing: 0.3rem; }
-        #landing-sign-up .sign-up-form-area .group .form-input-label {
-          color: #769dc3;
-          font-size: 16px;
-          font-weight: normal;
-          position: absolute;
-          pointer-events: none;
-          left: 3px;
-          top: 5px;
-          transition: 300ms ease all; }
-          #landing-sign-up .sign-up-form-area .group .form-input-label.shrink {
-            top: -20px;
-            font-size: 11px; }
-      #landing-sign-up .sign-up-form-area .btn-main {
-        margin-top: 15px; }
