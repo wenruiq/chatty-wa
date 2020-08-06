@@ -9,19 +9,20 @@
 
 body {
   font-family: 'Open-Sans', sans-serif;
-  background: #fff;
-  color: #000;
+  height: 100vh;
+  background: $main-bg no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 // Login page
 #login {
-  // Main wrapper with bg
+  // Main wrapper
   &-wrapper {
-    background: $main-bg no-repeat center center/cover;
-    height: 100vh;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 
   // Center box
@@ -33,19 +34,24 @@ body {
 
   // Sign in (left square)
   &-sign-in {
-    padding: 2rem;
     background: $light-color;
+    width: 500px;
+    padding: 2rem 3.5rem;
 
     .sign-in-top {
       display: grid;
       grid-template-areas:
         'logo title'
         'logo msg';
+      margin-bottom: 20px;
 
       .sign-in-logo {
         grid-area: logo;
-        width: 152px;
-        height: 97px;
+        width: 90px;
+        height: 83px;
+        align-self: center;
+        justify-self: center;
+        margin-right: 25px;
       }
 
       .sign-in-title {
@@ -53,16 +59,14 @@ body {
         display: flex;
         align-items: center;
         font-weight: bold;
-        font-size: 1.9rem;
+        font-size: 1.8rem;
         color: $dark-color;
-        padding-right: 2rem;
       }
 
       .sign-in-message {
         grid-area: msg;
         align-self: center;
         color: $main-color;
-        padding-right: 2rem;
       }
     }
 
@@ -71,7 +75,6 @@ body {
       display: flex;
       flex-direction: column;
       margin: 15px 0;
-      padding: 0 2rem;
 
       .group {
         position: relative;
@@ -81,7 +84,7 @@ body {
           background: none;
           background-color: $light-color;
           color: $main-color;
-          font-size: 20px;
+          font-size: 22px;
           padding: 3px 3px;
           display: block;
           width: 100%;
@@ -109,7 +112,7 @@ body {
           position: absolute;
           pointer-events: none;
           left: 3px;
-          top: 5px;
+          top: 9px;
           transition: 300ms ease all;
 
           &.shrink {
@@ -119,7 +122,7 @@ body {
       }
 
       .btn-main {
-        margin: 15px 0 25px 0;
+        margin: 24px 0 26px 0;
       }
     }
   }
@@ -127,14 +130,15 @@ body {
   // Sign-up (Right Square)
   &-sign-up {
     background: $dark-color;
-    padding: 40px 5rem;
+    width: 500px;
+    padding: 2rem 3.5rem;
 
     .sign-up-top {
       display: flex;
       flex-direction: column;
 
       .sign-up-title {
-        font-size: 1.9rem;
+        font-size: 1.8rem;
         color: $light-color;
         margin-bottom: 20px;
       }
@@ -152,7 +156,7 @@ body {
 
       .group {
         position: relative;
-        margin: 25px 0;
+        margin: 20px 0;
 
         .form-input {
           background: none;
@@ -164,7 +168,7 @@ body {
           width: 100%;
           border: none;
           border-radius: 0;
-          border-bottom: 1px solid $light-color;
+          border-bottom: 1.5px solid $light-color;
 
           &:focus {
             outline: none;
@@ -186,7 +190,7 @@ body {
           position: absolute;
           pointer-events: none;
           left: 3px;
-          top: 5px;
+          top: 4px;
           transition: 300ms ease all;
 
           &.shrink {
@@ -195,7 +199,7 @@ body {
         }
       }
       .btn-sign-up {
-        margin-top: 15px;
+        margin-top: 22px;
       }
     }
   }

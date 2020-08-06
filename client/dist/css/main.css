@@ -31,15 +31,16 @@
 
 body {
   font-family: 'Open-Sans', sans-serif;
-  background: #fff;
-  color: #000; }
+  height: 100vh;
+  background: url(../assets/main-bg.jpeg) no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
 
 #login-wrapper {
-  background: url(../assets/main-bg.jpeg) no-repeat center center/cover;
-  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center; }
+  align-items: center;
+  justify-content: center; }
 
 #login-box {
   display: flex;
@@ -47,34 +48,36 @@ body {
   background: #e8eef5; }
 
 #login-sign-in {
-  padding: 2rem;
-  background: #e8eef5; }
+  background: #e8eef5;
+  width: 500px;
+  padding: 2rem 3.5rem; }
   #login-sign-in .sign-in-top {
     display: grid;
-    grid-template-areas: 'logo title' 'logo msg'; }
+    grid-template-areas: 'logo title' 'logo msg';
+    margin-bottom: 20px; }
     #login-sign-in .sign-in-top .sign-in-logo {
       grid-area: logo;
-      width: 152px;
-      height: 97px; }
+      width: 90px;
+      height: 83px;
+      align-self: center;
+      justify-self: center;
+      margin-right: 25px; }
     #login-sign-in .sign-in-top .sign-in-title {
       grid-area: title;
       display: flex;
       align-items: center;
       font-weight: bold;
-      font-size: 1.9rem;
-      color: #0d2e4d;
-      padding-right: 2rem; }
+      font-size: 1.8rem;
+      color: #0d2e4d; }
     #login-sign-in .sign-in-top .sign-in-message {
       grid-area: msg;
       align-self: center;
-      color: #1b5c9b;
-      padding-right: 2rem; }
+      color: #1b5c9b; }
   #login-sign-in .sign-in-form-area {
     background: #e8eef5;
     display: flex;
     flex-direction: column;
-    margin: 15px 0;
-    padding: 0 2rem; }
+    margin: 15px 0; }
     #login-sign-in .sign-in-form-area .group {
       position: relative;
       margin: 30px 0; }
@@ -82,7 +85,7 @@ body {
         background: none;
         background-color: #e8eef5;
         color: #1b5c9b;
-        font-size: 20px;
+        font-size: 22px;
         padding: 3px 3px;
         display: block;
         width: 100%;
@@ -103,22 +106,23 @@ body {
         position: absolute;
         pointer-events: none;
         left: 3px;
-        top: 5px;
+        top: 9px;
         transition: 300ms ease all; }
         #login-sign-in .sign-in-form-area .group .form-input-label.shrink {
           top: -20px;
           font-size: 12px; }
     #login-sign-in .sign-in-form-area .btn-main {
-      margin: 15px 0 25px 0; }
+      margin: 24px 0 26px 0; }
 
 #login-sign-up {
   background: #0d2e4d;
-  padding: 40px 5rem; }
+  width: 500px;
+  padding: 2rem 3.5rem; }
   #login-sign-up .sign-up-top {
     display: flex;
     flex-direction: column; }
     #login-sign-up .sign-up-top .sign-up-title {
-      font-size: 1.9rem;
+      font-size: 1.8rem;
       color: #e8eef5;
       margin-bottom: 20px; }
     #login-sign-up .sign-up-top .sign-up-message {
@@ -130,7 +134,7 @@ body {
     margin-top: 15px; }
     #login-sign-up .sign-up-form-area .group {
       position: relative;
-      margin: 25px 0; }
+      margin: 20px 0; }
       #login-sign-up .sign-up-form-area .group .form-input {
         background: none;
         background-color: #0d2e4d;
@@ -141,7 +145,7 @@ body {
         width: 100%;
         border: none;
         border-radius: 0;
-        border-bottom: 1px solid #e8eef5; }
+        border-bottom: 1.5px solid #e8eef5; }
         #login-sign-up .sign-up-form-area .group .form-input:focus {
           outline: none; }
         #login-sign-up .sign-up-form-area .group .form-input:focus ~ .form-input-label {
@@ -156,10 +160,10 @@ body {
         position: absolute;
         pointer-events: none;
         left: 3px;
-        top: 5px;
+        top: 4px;
         transition: 300ms ease all; }
         #login-sign-up .sign-up-form-area .group .form-input-label.shrink {
           top: -20px;
           font-size: 12px; }
     #login-sign-up .sign-up-form-area .btn-sign-up {
-      margin-top: 15px; }
+      margin-top: 22px; }
