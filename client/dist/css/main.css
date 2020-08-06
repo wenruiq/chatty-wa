@@ -24,6 +24,15 @@
   .btn-sign-up:hover {
     background-color: #316ca5; }
 
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; }
+  .profile-image-sm {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; }
+
 * {
   margin: 0;
   padding: 0;
@@ -46,127 +55,139 @@ body {
   display: flex;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
   background: #e8eef5; }
-
-#login-sign-in {
-  background: #e8eef5;
-  width: 525px;
-  padding: 3rem 4.5rem 3.5rem 4.5rem; }
-  #login-sign-in .sign-in-top {
-    display: grid;
-    grid-template-areas: 'logo title' 'logo msg';
-    margin-bottom: 22px; }
-    #login-sign-in .sign-in-top .sign-in-logo {
-      grid-area: logo;
-      width: 90px;
-      height: 83px;
-      align-self: center;
-      justify-self: center;
-      margin-right: 25px; }
-    #login-sign-in .sign-in-top .sign-in-title {
-      grid-area: title;
-      align-self: center;
-      font-weight: bold;
-      font-size: 1.8rem;
-      color: #0d2e4d; }
-    #login-sign-in .sign-in-top .sign-in-message {
-      grid-area: msg;
-      align-self: center;
-      color: #1b5c9b; }
-  #login-sign-in .sign-in-form-area {
+  #login-box .sign-in {
     background: #e8eef5;
-    display: flex;
-    flex-direction: column; }
-    #login-sign-in .sign-in-form-area .group {
-      position: relative;
-      margin: 32px 0; }
-      #login-sign-in .sign-in-form-area .group .form-input {
-        background: none;
-        background-color: #e8eef5;
-        color: #1b5c9b;
-        font-size: 22px;
-        padding: 3px 3px;
-        display: block;
-        width: 100%;
-        border: none;
-        border-radius: 0;
-        border-bottom: 2px solid #1b5c9b; }
-        #login-sign-in .sign-in-form-area .group .form-input:focus {
-          outline: none; }
-        #login-sign-in .sign-in-form-area .group .form-input:focus ~ .form-input-label {
-          top: -20px;
-          font-size: 12px; }
-      #login-sign-in .sign-in-form-area .group input[type='password'] {
-        letter-spacing: 0.3rem; }
-      #login-sign-in .sign-in-form-area .group .form-input-label {
-        color: #769dc3;
-        font-size: 16px;
-        font-weight: normal;
-        position: absolute;
-        pointer-events: none;
-        left: 3px;
-        top: 7px;
-        transition: 300ms ease all; }
-        #login-sign-in .sign-in-form-area .group .form-input-label.shrink {
-          top: -20px;
-          font-size: 12px; }
-    #login-sign-in .sign-in-form-area .btn-main {
-      margin: 29px 0 26px 0; }
-
-#login-sign-up {
-  background: #0d2e4d;
-  width: 525px;
-  padding: 3rem 4.5rem 3.5rem 4.5rem; }
-  #login-sign-up .sign-up-top {
-    display: grid;
-    grid-template-areas: 'title' 'msg';
-    height: 83px;
-    margin-bottom: 10px; }
-    #login-sign-up .sign-up-top .sign-up-title {
-      grid-area: title;
-      font-size: 1.8rem;
-      color: #fff;
-      font-weight: bold;
-      align-self: center; }
-    #login-sign-up .sign-up-top .sign-up-message {
-      grid-area: msg;
-      color: #e8eef5;
-      align-self: center; }
-  #login-sign-up .sign-up-form-area {
+    width: 525px;
+    padding: 3rem 4.5rem 3.5rem 4.5rem; }
+    #login-box .sign-in-top {
+      display: grid;
+      grid-template-areas: 'logo title' 'logo msg';
+      margin-bottom: 22px; }
+      #login-box .sign-in-top .sign-in-logo {
+        grid-area: logo;
+        width: 90px;
+        height: 83px;
+        align-self: center;
+        justify-self: center;
+        margin-right: 25px; }
+      #login-box .sign-in-top .sign-in-title {
+        grid-area: title;
+        align-self: center;
+        font-weight: bold;
+        font-size: 1.8rem;
+        color: #0d2e4d; }
+      #login-box .sign-in-top .sign-in-message {
+        grid-area: msg;
+        align-self: center;
+        color: #1b5c9b; }
+    #login-box .sign-in-form-area {
+      background: #e8eef5;
+      display: flex;
+      flex-direction: column; }
+      #login-box .sign-in-form-area .group {
+        position: relative;
+        margin: 32px 0; }
+        #login-box .sign-in-form-area .group .form-input {
+          background: none;
+          background-color: #e8eef5;
+          color: #1b5c9b;
+          font-size: 22px;
+          padding: 3px 3px;
+          display: block;
+          width: 100%;
+          border: none;
+          border-radius: 0;
+          border-bottom: 2px solid #1b5c9b; }
+          #login-box .sign-in-form-area .group .form-input:focus {
+            outline: none; }
+          #login-box .sign-in-form-area .group .form-input:focus ~ .form-input-label {
+            top: -20px;
+            font-size: 12px; }
+        #login-box .sign-in-form-area .group input[type='password'] {
+          letter-spacing: 0.3rem; }
+        #login-box .sign-in-form-area .group .form-input-label {
+          color: #769dc3;
+          font-size: 16px;
+          font-weight: normal;
+          position: absolute;
+          pointer-events: none;
+          left: 3px;
+          top: 7px;
+          transition: 300ms ease all; }
+          #login-box .sign-in-form-area .group .form-input-label.shrink {
+            top: -20px;
+            font-size: 12px; }
+      #login-box .sign-in-form-area .btn-main {
+        margin: 29px 0 26px 0; }
+  #login-box .sign-up {
     background: #0d2e4d;
-    display: flex;
-    flex-direction: column; }
-    #login-sign-up .sign-up-form-area .group {
-      position: relative;
-      margin: 20px 0; }
-      #login-sign-up .sign-up-form-area .group .form-input {
-        background: none;
-        background-color: #0d2e4d;
+    width: 525px;
+    padding: 3rem 4.5rem 3.5rem 4.5rem; }
+    #login-box .sign-up-top {
+      display: grid;
+      grid-template-areas: 'title' 'msg';
+      height: 83px;
+      margin-bottom: 10px; }
+      #login-box .sign-up-top .sign-up-title {
+        grid-area: title;
+        font-size: 1.8rem;
         color: #fff;
-        font-size: 20px;
-        padding: 3px 3px;
-        display: block;
-        width: 100%;
-        border: none;
-        border-radius: 0;
-        border-bottom: 1.5px solid #e8eef5; }
-        #login-sign-up .sign-up-form-area .group .form-input:focus {
-          outline: none; }
-        #login-sign-up .sign-up-form-area .group .form-input:focus ~ .form-input-label {
-          top: -20px;
-          font-size: 12px; }
-      #login-sign-up .sign-up-form-area .group input[type='password'] {
-        letter-spacing: 0.3rem; }
-      #login-sign-up .sign-up-form-area .group .form-input-label {
-        color: #769dc3;
-        font-size: 16px;
-        font-weight: normal;
-        position: absolute;
-        pointer-events: none;
-        left: 3px;
-        top: 5px;
-        transition: 300ms ease all; }
-        #login-sign-up .sign-up-form-area .group .form-input-label.shrink {
-          top: -20px;
-          font-size: 12px; }
-    #login-sign-up .sign-up-form-area .btn-sign-up {
-      margin-top: 22px; }
+        font-weight: bold;
+        align-self: center; }
+      #login-box .sign-up-top .sign-up-message {
+        grid-area: msg;
+        color: #e8eef5;
+        align-self: center; }
+    #login-box .sign-up-form-area {
+      background: #0d2e4d;
+      display: flex;
+      flex-direction: column; }
+      #login-box .sign-up-form-area .group {
+        position: relative;
+        margin: 20px 0; }
+        #login-box .sign-up-form-area .group .form-input {
+          background: none;
+          background-color: #0d2e4d;
+          color: #fff;
+          font-size: 20px;
+          padding: 3px 3px;
+          display: block;
+          width: 100%;
+          border: none;
+          border-radius: 0;
+          border-bottom: 1.5px solid #e8eef5; }
+          #login-box .sign-up-form-area .group .form-input:focus {
+            outline: none; }
+          #login-box .sign-up-form-area .group .form-input:focus ~ .form-input-label {
+            top: -20px;
+            font-size: 12px; }
+        #login-box .sign-up-form-area .group input[type='password'] {
+          letter-spacing: 0.3rem; }
+        #login-box .sign-up-form-area .group .form-input-label {
+          color: #769dc3;
+          font-size: 16px;
+          font-weight: normal;
+          position: absolute;
+          pointer-events: none;
+          left: 3px;
+          top: 5px;
+          transition: 300ms ease all; }
+          #login-box .sign-up-form-area .group .form-input-label.shrink {
+            top: -20px;
+            font-size: 12px; }
+      #login-box .sign-up-form-area .btn-sign-up {
+        margin-top: 22px; }
+
+#main-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+#main-box {
+  display: grid;
+  grid-template-columns: 4fr 8fr; }
+  #main-box .nav-col {
+    background-color: #e8eef5;
+    border-right: 1px solid black; }
+  #main-box .chat-col {
+    background-color: #e8eef5; }

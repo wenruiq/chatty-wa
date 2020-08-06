@@ -3,15 +3,111 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
     <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
     <title>Chatty Web</title>
   </head>
   <body>
     <section id="main-wrapper">
-      <div class="main-box">
-        
+      <div id="main-box">
+        <div class="nav-col">
+          <!-- Nav top -->
+          <div class="nav-col-top">
+            <img src="assets/user-photo.jpg" alt="" class="profile-image" />
+            <div class="user-info">
+              <div class="user-displayname">Steve Rogers</div>
+              <div class="user-email">steverogers@gmail.com</div>
+            </div>
+            <div class="icons-tray">
+              <i class="material-icons">groups</i>
+              <i class="material-icons">exit_to_app</i>
+            </div>
+          </div>
+          <!-- Nav search -->
+          <div class="nav-col-search">
+            <i class="material-icons">search</i>
+            <input
+              type="text"
+              id="search"
+              name="search"
+              class="search-input"
+              placeholder="Search to add friends"
+            />
+            <i class="material-icons">clear</i>
+          </div>
+          <!-- Nav chat/friend list -->
+          <div class="nav-col-list">
+            <a href="#" class="list-bar">
+              <img
+                src="assets/dummies/dummy1.png"
+                alt=""
+                class="profile-image"
+              />
+              <div class="bar-info">
+                <div class="bar-info-left">
+                  <div class="bar-name">Pepe</div>
+                  <div class="bar-latest-msg">You pepega or wad</div>
+                </div>
+                <div class="bar-info-right">12:35</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="chat-col">
+          <!-- Chat top -->
+          <div class="chat-col-top">
+            <img src="assets/dummies/dummy2.png" alt="" class="profile-image" />
+            <div class="current-chat-name">Jimmy</div>
+            <i class="material-icons">block</i>
+          </div>
+          <!-- Chat messages box -->
+          <div class="chat-col-messages">
+            <div class="message-wrapper-incoming">
+              <img
+                src="assets/dummies/dummy2.png"
+                alt=""
+                class="profile-image-sm"
+              />
+              <div class="bubble">
+                <div class="sender">Jimmy</div>
+                <div class="message-content">Hey man, wassup yo!</div>
+              </div>
+            </div>
+            <div class="message-wrapper-outgoing">
+              <img
+                src="assets/user-photo.jpg"
+                alt=""
+                class="profile-image-sm"
+              />
+              <div class="bubble">
+                <div class="message-content">Hi! Nice to meet you bro!</div>
+              </div>
+            </div>
+          </div>
+          <!-- Chat input -->
+          <div class="chat-col-input">
+            <input
+              type="text"
+              id="typed-message"
+              name="typed-message"
+              class="typed-message-input"
+              placeholder="Type a message..."
+            />
+            <i class="material-icons">send</i>
+          </div>
+        </div>
       </div>
     </section>
-    <button id="signout">Sign Out</button>
+    <!-- <button id="main-sign-out">Sign Out</button> -->
   </body>
 </html>

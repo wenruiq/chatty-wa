@@ -31,6 +31,6 @@ auth.onAuthStateChanged(async userAuth => {
   }
 });
 
-document.querySelector('#signout').addEventListener('click', e => {
+document.querySelector('#main-sign-out').addEventListener('click', e => {
   auth.signOut();
 });
