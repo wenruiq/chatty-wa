@@ -16,6 +16,30 @@ body {
   justify-content: center;
 }
 
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+i {
+  color: $chat-dark-color;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+// Scrollbar
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-track {
+  background: hsla(0, 0%, 100%, 0.1);
+}
+
 // Login page
 #login {
   // Main wrapper for everything
@@ -212,28 +236,169 @@ body {
 }
 
 // Main page
-#main {
-  &-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+#main-wrapper {
+  z-index: 100;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
 
   // Center box (left nav col, right chat col)
-  &-box {
-    display: grid;
-    grid-template-columns: 4fr 8fr;
+  #center-box {
+    position: relative;
+    top: 19px;
+    width: 1396px;
+    height: calc(100% - 38px);
+    display: flex;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
 
+    // Left col (navigation, friend/chat list)
     .nav-col {
-      background-color: $light-color;
-      border-right: 1px solid black;
+      height: 100%;
+      min-width: 250px;
+      border-right: 1px solid $chat-border-color;
+      flex: 30%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+
+      // Nav top
+      &-top {
+        min-height: 60px;
+        width: 100%;
+        background: $chat-medium-color;
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &-photo-and-displayname {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-left: 16px;
+
+          .user-displayname {
+            font-size: 0.9rem;
+            margin-left: 10px;
+            font-weight: bold;
+          }
+        }
+        &-icons-tray {
+          display: flex;
+          align-items: center;
+          margin-right: 25px;
+          i {
+            margin-left: 20px;
+          }
+        }
+      }
+
+      // Nav search
+      &-search {
+        min-height: 50px;
+        width: 100%;
+        background: $chat-light-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        input {
+          height: 65%;
+          width: 95%;
+          border-radius: 30px;
+          border: none;
+          padding: 0 6px 0 35px;
+          position: relative;
+
+          &:focus {
+            outline: none;
+            border: 2px solid $medium-color;
+          }
+        }
+        .search-icon {
+          position: absolute;
+          left: 18px;
+          z-index: 98;
+        }
+        .clear-search-icon {
+          position: absolute;
+          right: 18px;
+        }
+      }
+
+      // Nav list
+      &-list {
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid $chat-border-color;
+
+        .list-bar {
+          min-height: 72px;
+          display: flex;
+          align-items: center;
+          padding: 0 14px;
+          position: relative;
+
+          &:hover {
+            background: $chat-medium-color;
+          }
+
+          &::after {
+            content: '';
+            height: 1px;
+            width: calc(100% - 36px);
+            position: absolute;
+            background: $chat-medium-color;
+            bottom: 0;
+            left: 18px;
+          }
+
+          .bar-img {
+            flex: 10%;
+            margin-right: 15px;
+            display: flex;
+
+            img {
+              align-self: center;
+            }
+          }
+
+          .bar-info {
+            flex: 90%;
+            display: flex;
+            justify-content: space-between;
+
+            &-left {
+              display: flex;
+              flex-direction: column;
+
+              .bar-name {
+                font-size: 17px;
+                margin-bottom: 2px;
+              }
+              .bar-latest-msg {
+                font-size: 14px;
+                color: hsla(0, 0, 0, 0.6);
+              }
+            }
+            &-right {
+              font-size: 12px;
+              color: hsla(0, 0, 0, 0.5);
+            }
+          }
+        }
+      }
     }
 
+    // Right col (messages window)
     .chat-col {
-      background-color: $light-color;
+      height: 100%;
+      flex: 0 0 70%;
     }
-  }
-
-  &-sign-out {
   }
 }
