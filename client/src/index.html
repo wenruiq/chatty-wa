@@ -22,19 +22,22 @@
         <div class="nav-col">
           <!-- Nav top -->
           <div class="nav-col-top">
-            <div class="nav-col-top-photo-and-displayname">
+            <div class="nav-col-top-photo-and-info">
               <img
                 src="assets/user-photo.jpg"
                 alt=""
                 class="profile-image-sm"
               />
-              <div class="user-displayname">
-                Steve Rogers
+              <div class="user-info">
+                <div class="user-displayname">
+                  Steve Rogers
+                </div>
+                <div class="user-email">steverogers1337@gmail.com</div>
               </div>
             </div>
             <div class="nav-col-top-icons-tray">
               <i class="material-icons">groups</i>
-              <i class="material-icons">exit_to_app</i>
+              <i class="material-icons sign-out-icon">exit_to_app</i>
             </div>
           </div>
           <!-- Nav search -->
@@ -186,7 +189,8 @@
                 </div>
                 <div class="bar-info-right">12:35</div>
               </div>
-            </a>            <!-- bar markup -->
+            </a>
+            <!-- bar markup -->
             <a href="#" class="list-bar">
               <div class="bar-img">
                 <img
@@ -202,7 +206,8 @@
                 </div>
                 <div class="bar-info-right">12:35</div>
               </div>
-            </a>            <!-- bar markup -->
+            </a>
+            <!-- bar markup -->
             <a href="#" class="list-bar">
               <div class="bar-img">
                 <img
@@ -218,7 +223,8 @@
                 </div>
                 <div class="bar-info-right">12:35</div>
               </div>
-            </a>            <!-- bar markup -->
+            </a>
+            <!-- bar markup -->
             <a href="#" class="list-bar">
               <div class="bar-img">
                 <img
@@ -234,7 +240,8 @@
                 </div>
                 <div class="bar-info-right">12:35</div>
               </div>
-            </a>            <!-- bar markup -->
+            </a>
+            <!-- bar markup -->
             <a href="#" class="list-bar">
               <div class="bar-img">
                 <img
@@ -250,7 +257,8 @@
                 </div>
                 <div class="bar-info-right">12:35</div>
               </div>
-            </a>            <!-- bar markup -->
+            </a>
+            <!-- bar markup -->
             <a href="#" class="list-bar">
               <div class="bar-img">
                 <img
@@ -266,7 +274,8 @@
                 </div>
                 <div class="bar-info-right">12:35</div>
               </div>
-            </a>            <!-- bar markup -->
+            </a>
+            <!-- bar markup -->
             <a href="#" class="list-bar">
               <div class="bar-img">
                 <img
@@ -288,36 +297,64 @@
 
         <!-- Chat col -->
         <div class="chat-col">
+          <div class="start-up">
+            <div class="welcome-message">Welcome to chatty! Choose a chat and start messaging!</div>
+          </div>
           <!-- Chat top -->
           <div class="chat-col-top">
-            <img src="assets/dummies/dummy2.png" alt="" class="profile-image" />
-            <div class="current-chat-name">Jimmy</div>
-            <i class="material-icons">block</i>
-          </div>
-          <!-- Chat messages box -->
-          <div class="chat-col-messages">
-            <div class="message-wrapper-incoming">
+            <div class="chat-col-top-photo-and-info">
               <img
                 src="assets/dummies/dummy2.png"
                 alt=""
                 class="profile-image-sm"
               />
-              <div class="bubble">
-                <div class="sender">Jimmy</div>
-                <div class="message-content">Hey man, wassup yo!</div>
-              </div>
-            </div>
-            <div class="message-wrapper-outgoing">
-              <img
-                src="assets/user-photo.jpg"
-                alt=""
-                class="profile-image-sm"
-              />
-              <div class="bubble">
-                <div class="message-content">Hi! Nice to meet you bro!</div>
+              <div class="chat-info">
+                <div class="chat-name">Jimmy McGill</div>
               </div>
             </div>
           </div>
+
+          <!-- Chat messages box -->
+          <div class="chat-col-messages">
+            <div class="bubble-incoming">
+              <div class="message-sender">Jimmy</div>
+              <div class="message-content">
+               short message?
+              </div>
+              <div class="message-time">13:42</div>
+              <div class="tail-in"></div>
+            </div>
+            <div class="bubble-outgoing">
+              <div class="message-content">
+                hello...
+              </div>
+              <div class="message-time">14:30</div>
+              <div class="tail-out"></div>
+            </div>
+            <div class="bubble-outgoing">
+              <div class="message-content">
+                hello...
+              </div>
+              <div class="message-time">14:30</div>
+              <div class="tail-out"></div>
+            </div>
+            <div class="bubble-outgoing">
+              <div class="message-content">
+                Medium message lols. Medium message lols. Medium message lols. Medium message lols. 
+              </div>
+              <div class="message-time">14:30</div>
+              <div class="tail-out"></div>
+            </div>
+            <div class="bubble-incoming">
+              <div class="message-sender">Jimmy</div>
+              <div class="message-content">
+                long ass message? long ass message? long ass message? long ass message? 
+              </div>
+              <div class="message-time">13:42</div>
+              <div class="tail-in"></div>
+            </div>
+          </div>
+          
           <!-- Chat input -->
           <div class="chat-col-input">
             <input
@@ -325,9 +362,9 @@
               id="typed-message"
               name="typed-message"
               class="typed-message-input"
-              placeholder="Type a message..."
+              placeholder="Type a message here..."
             />
-            <i class="material-icons">send</i>
+            <i class="material-icons .md-48 send-icon">send</i>
           </div>
         </div>
       </div>

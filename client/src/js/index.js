@@ -3,18 +3,25 @@ import { auth, createUserDocument } from './firebase/firebase.utils';
 
 const state = {};
 
-// Handle firebase sign in authentications
+// *Control Login
+const controlLogin = () => {
+  // todo: load nav-column-top
+  
+};
+
+// *Handle firebase sign in authentications
 auth.onAuthStateChanged(async userAuth => {
   if (userAuth) {
-    // Check if this was a sign up
+    console.log({ userAuth });
+    // *Check if this was a sign up
     const displayName = localStorage.getItem('displayName');
     if (displayName) {
-      // Sign up process
+      // *Sign up process
       const userRef = await createUserDocument(userAuth, { displayName });
       localStorage.setItem('displayName', null);
     }
-  
     const userRef = await createUserDocument(userAuth);
+
     userRef.onSnapshot(snapShot => {
       state.currentUser = {
         id: snapShot.id,
@@ -24,13 +31,13 @@ auth.onAuthStateChanged(async userAuth => {
     });
   }
 
-  // If not logged in/signed out, redirects to login page
+  // *If not logged in/signed out, redirects to login page
   if (!userAuth) {
     state.currentUser = userAuth;
     window.location.replace('login.html');
   }
 });
 
-document.querySelector('#main-sign-out').addEventListener('click', e => {
+document.querySelector('.sign-out-icon').addEventListener('click', e => {
   auth.signOut();
 });

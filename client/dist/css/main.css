@@ -198,7 +198,6 @@ i {
         margin-top: 22px; }
 
 #main-wrapper {
-  z-index: 100;
   height: 100%;
   width: 100%;
   display: flex;
@@ -210,11 +209,12 @@ i {
     width: 1396px;
     height: calc(100% - 38px);
     display: flex;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8); }
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
+    overflow-x: auto; }
     #main-wrapper #center-box .nav-col {
       height: 100%;
-      min-width: 250px;
-      border-right: 1px solid #d7d7d7;
+      min-width: 350px;
+      border-right: 1px solid gainsboro;
       flex: 30%;
       position: relative;
       display: flex;
@@ -222,50 +222,55 @@ i {
       #main-wrapper #center-box .nav-col-top {
         min-height: 60px;
         width: 100%;
-        background: #ededed;
+        background: #e6e6e6;
         color: #000;
         display: flex;
         align-items: center;
         justify-content: space-between; }
-        #main-wrapper #center-box .nav-col-top-photo-and-displayname {
+        #main-wrapper #center-box .nav-col-top-photo-and-info {
           display: flex;
           align-items: center;
           justify-content: center;
           margin-left: 16px; }
-          #main-wrapper #center-box .nav-col-top-photo-and-displayname .user-displayname {
-            font-size: 0.9rem;
-            margin-left: 10px;
-            font-weight: bold; }
+          #main-wrapper #center-box .nav-col-top-photo-and-info .user-info {
+            margin-left: 10px; }
+            #main-wrapper #center-box .nav-col-top-photo-and-info .user-info .user-displayname {
+              font-size: 15px;
+              margin-bottom: 3px;
+              font-weight: bold; }
+            #main-wrapper #center-box .nav-col-top-photo-and-info .user-info .user-email {
+              font-size: 13px;
+              color: rgba(0, 0, 0, 0.6); }
         #main-wrapper #center-box .nav-col-top-icons-tray {
           display: flex;
           align-items: center;
-          margin-right: 25px; }
+          margin-right: 15px; }
           #main-wrapper #center-box .nav-col-top-icons-tray i {
             margin-left: 20px; }
       #main-wrapper #center-box .nav-col-search {
         min-height: 50px;
         width: 100%;
-        background: #f7f7f7;
+        background: #f0f0f0;
         display: flex;
         align-items: center;
         justify-content: center; }
         #main-wrapper #center-box .nav-col-search input {
           height: 65%;
-          width: 95%;
+          width: 93%;
           border-radius: 30px;
           border: none;
           padding: 0 6px 0 35px;
           position: relative; }
           #main-wrapper #center-box .nav-col-search input:focus {
             outline: none;
-            border: 2px solid #769dc3; }
+            border: 2px solid #e8eef5; }
         #main-wrapper #center-box .nav-col-search .search-icon {
           position: absolute;
-          left: 18px;
-          z-index: 98; }
+          left: 20px;
+          z-index: 100; }
         #main-wrapper #center-box .nav-col-search .clear-search-icon {
           position: absolute;
-          right: 18px; }
+          right: 20px; }
       #main-wrapper #center-box .nav-col-list {
         width: 100%;
         height: 100%;
@@ -273,7 +278,7 @@ i {
         background: #fff;
         display: flex;
         flex-direction: column;
-        border-top: 1px solid #d7d7d7; }
+        border-top: 1px solid gainsboro; }
         #main-wrapper #center-box .nav-col-list .list-bar {
           min-height: 72px;
           display: flex;
@@ -281,13 +286,13 @@ i {
           padding: 0 14px;
           position: relative; }
           #main-wrapper #center-box .nav-col-list .list-bar:hover {
-            background: #ededed; }
+            background: #e6e6e6; }
           #main-wrapper #center-box .nav-col-list .list-bar::after {
             content: '';
             height: 1px;
             width: calc(100% - 36px);
             position: absolute;
-            background: #ededed;
+            background: #e6e6e6;
             bottom: 0;
             left: 18px; }
           #main-wrapper #center-box .nav-col-list .list-bar .bar-img {
@@ -299,13 +304,15 @@ i {
           #main-wrapper #center-box .nav-col-list .list-bar .bar-info {
             flex: 90%;
             display: flex;
-            justify-content: space-between; }
+            justify-content: space-between;
+            align-items: flex-start; }
             #main-wrapper #center-box .nav-col-list .list-bar .bar-info-left {
               display: flex;
               flex-direction: column; }
               #main-wrapper #center-box .nav-col-list .list-bar .bar-info-left .bar-name {
                 font-size: 17px;
-                margin-bottom: 2px; }
+                margin-bottom: 2px;
+                font-weight: 500; }
               #main-wrapper #center-box .nav-col-list .list-bar .bar-info-left .bar-latest-msg {
                 font-size: 14px;
                 color: rgba(0, 0, 0, 0.6); }
@@ -314,4 +321,133 @@ i {
               color: rgba(0, 0, 0, 0.5); }
     #main-wrapper #center-box .chat-col {
       height: 100%;
-      flex: 0 0 70%; }
+      flex: 70%;
+      display: flex;
+      flex-direction: column;
+      position: relative; }
+      #main-wrapper #center-box .chat-col-top {
+        min-height: 60px;
+        width: 100%;
+        background: #e6e6e6;
+        color: #000;
+        display: flex;
+        align-items: center; }
+        #main-wrapper #center-box .chat-col-top-photo-and-info {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-left: 16px; }
+          #main-wrapper #center-box .chat-col-top-photo-and-info .chat-info .chat-name {
+            font-size: 15px;
+            margin-left: 10px;
+            font-weight: bold; }
+      #main-wrapper #center-box .chat-col-messages {
+        flex: 1 1 0;
+        width: 100%;
+        background: #769dc3;
+        overflow-y: auto;
+        border-top: 1px solid gainsboro;
+        display: flex;
+        flex-direction: column;
+        padding-top: 20px;
+        min-width: 666px; }
+        #main-wrapper #center-box .chat-col-messages .bubble-incoming {
+          align-self: flex-start;
+          position: relative;
+          left: 75px;
+          background: #fff;
+          display: flex;
+          flex-direction: column;
+          border-radius: 0 10px 10px 10px;
+          margin: 10px 0;
+          min-width: 100px;
+          max-width: 500px; }
+          #main-wrapper #center-box .chat-col-messages .bubble-incoming .message-sender {
+            font-size: 13px;
+            font-weight: bold;
+            color: red;
+            margin: 6px 0 3px 10px; }
+          #main-wrapper #center-box .chat-col-messages .bubble-incoming .message-content {
+            font-size: 14px;
+            margin: 0 15px 4px 10px;
+            text-align: left;
+            color: black; }
+          #main-wrapper #center-box .chat-col-messages .bubble-incoming .message-time {
+            font-size: 11px;
+            margin: 0 10px 6px 0;
+            align-self: flex-end;
+            color: rgba(0, 0, 0, 0.5); }
+          #main-wrapper #center-box .chat-col-messages .bubble-incoming .tail-in {
+            height: 10px;
+            width: 10px;
+            position: absolute;
+            top: 0;
+            left: -10px;
+            border-top: 10px solid #fff;
+            border-left: 10px solid #769dc3; }
+        #main-wrapper #center-box .chat-col-messages .bubble-outgoing {
+          align-self: flex-end;
+          position: relative;
+          right: 75px;
+          background: #e8eef5;
+          display: flex;
+          flex-direction: column;
+          border-radius: 10px 0 10px 10px;
+          margin: 10px 0;
+          min-width: 100px;
+          max-width: 500px; }
+          #main-wrapper #center-box .chat-col-messages .bubble-outgoing .message-content {
+            font-size: 14px;
+            margin: 6px 10px 4px 10px;
+            text-align: left;
+            color: black; }
+          #main-wrapper #center-box .chat-col-messages .bubble-outgoing .message-time {
+            font-size: 11px;
+            margin: 0 10px 6px 0;
+            align-self: flex-end;
+            color: rgba(0, 0, 0, 0.5); }
+          #main-wrapper #center-box .chat-col-messages .bubble-outgoing .tail-out {
+            height: 10px;
+            width: 10px;
+            position: absolute;
+            top: 0;
+            right: -10px;
+            border-top: 10px solid #e8eef5;
+            border-right: 10px solid #769dc3; }
+      #main-wrapper #center-box .chat-col-input {
+        min-height: 60px;
+        width: 100%;
+        background: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+        #main-wrapper #center-box .chat-col-input input {
+          height: 65%;
+          width: 100%;
+          border-radius: 30px;
+          border: none;
+          padding: 0 15px;
+          font-size: 17px;
+          margin-left: 16px;
+          margin-right: 16px; }
+          #main-wrapper #center-box .chat-col-input input:focus {
+            outline: none;
+            border: 2px solid #e8eef5; }
+        #main-wrapper #center-box .chat-col-input .send-icon {
+          margin-right: 16px;
+          font-size: 30px; }
+    #main-wrapper #center-box .start-up {
+      background: #769dc3;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      #main-wrapper #center-box .start-up .welcome-message {
+        color: #f0f0f0;
+        font-size: 15px;
+        background-color: #4a4a4a;
+        padding: 8px 16px;
+        border-radius: 15px; }
