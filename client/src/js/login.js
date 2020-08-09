@@ -10,26 +10,26 @@ import { elements } from './views/base';
 
 const state = {};
 
-// Logged in user are redirected to index.html
+// *Logged in user are redirected to index.html
 auth.onAuthStateChanged(user => {
   if (user) {
     window.location.replace('index.html');
   }
 });
 
-// Perform actions after page has loaded
+// *Perform actions after page has loaded
 window.addEventListener('load', () => {
   // Control form shrinks label when input.value.length > 0
   controlForms();
 });
 
-// Control forms
+// *Control forms
 const controlForms = () => {
   // Labels stay shrinked if there is form input in that field
   formsView.shrinkLabels();
 };
 
-// Control sign in
+// *Control sign in
 const controlSignIn = async () => {
   const email = signInView.getEmail();
   const password = signInView.getPassword();
@@ -54,7 +54,7 @@ elements.googleSignInBtn.addEventListener('click', e => {
   signInWithGoogle();
 });
 
-// Control sign up
+// *Control sign up
 const controlSignUp = async () => {
   const displayName = signUpView.getDisplayName();
   const email = signUpView.getEmail();

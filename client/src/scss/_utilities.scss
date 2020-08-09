@@ -58,6 +58,7 @@
   }
 }
 
+// *Full page spinner
 .spinner-wrapper {
   width: 100%;
   height: 100%;
@@ -91,7 +92,7 @@
         $medium-color 0%,
         $main-color 100%
       );
-      animation: spin 1s infinite linear;
+      animation: spinner-rotate 1s infinite linear;
     }
 
     &::after {
@@ -104,9 +105,46 @@
     }
   }
 
-  @keyframes spin {
+  @keyframes spinner-rotate {
     to {
       transform: rotate(360deg);
+    }
+  }
+}
+
+// *Loader template
+.loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  // todo: top property could be specified based on container of loader using JS
+  .loader-inner {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    border-radius: 50%;
+
+    .loader-spinner {
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      border-right: 3px solid $main-color;
+      border-top: 3px solid #bacee1;
+      border-left: 3px solid $main-color;
+      border-bottom: 3px solid #bacee1;
+      animation: loader-rotate 1.6s infinite linear;
+    }
+    @keyframes loader-rotate {
+      from {
+        transform: rotate(0);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
   }
 }

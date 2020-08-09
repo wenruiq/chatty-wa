@@ -29,7 +29,7 @@ i {
   }
 }
 
-// Scrollbar
+// *Scrollbar
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -41,22 +41,22 @@ i {
   background: hsla(0, 0%, 100%, 0.1);
 }
 
-// Login page
+// *Login page
 #login {
-  // Main wrapper for everything
+  // *Main wrapper for everything
   &-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  // Center box with 2 columns
+  // *Center box with 2 columns
   &-box {
     display: flex;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
     background: $light-color;
 
-    // Left col (sign in)
+    // *Left col (sign in)
     .sign-in {
       background: $light-color;
       width: 525px;
@@ -149,7 +149,7 @@ i {
       }
     }
 
-    // Right col (sign-up)
+    // *Right col (sign-up)
     .sign-up {
       background: $dark-color;
       width: 525px;
@@ -236,7 +236,7 @@ i {
   }
 }
 
-// Main page
+// *Main page
 #main-wrapper {
   height: 100%;
   width: 100%;
@@ -244,7 +244,7 @@ i {
   justify-content: center;
   overflow: hidden;
 
-  // Center box (left nav col, right chat col)
+  // *Center box (left nav col, right chat col)
   #center-box {
     position: relative;
     top: 19px;
@@ -253,8 +253,18 @@ i {
     display: flex;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8);
     overflow-x: auto;
+    animation: appear 1s linear;
 
-    // Left col (navigation, friend/chat list)
+    @keyframes appear {
+      from {
+        transform: scale(0);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+    // *Left col (navigation, friend/chat list)
     .nav-col {
       height: 100%;
       min-width: 350px;
@@ -264,7 +274,7 @@ i {
       display: flex;
       flex-direction: column;
 
-      // Nav top
+      // *Nav top
       &-top {
         min-height: 60px;
         width: 100%;
@@ -305,7 +315,7 @@ i {
         }
       }
 
-      // *Nav search
+      // **Nav search
       &-search {
         min-height: 50px;
         width: 100%;
@@ -337,7 +347,7 @@ i {
         }
       }
 
-      // Nav list
+      // *Nav list
       &-list {
         width: 100%;
         height: 100%;
@@ -407,7 +417,7 @@ i {
       }
     }
 
-    // Right col (messages window)
+    // *Right col (messages window)
     .chat-col {
       height: 100%;
       flex: 70%;
@@ -415,7 +425,7 @@ i {
       flex-direction: column;
       position: relative;
 
-      // Chat top
+      // *Chat top
       &-top {
         min-height: 60px;
         width: 100%;
@@ -440,7 +450,7 @@ i {
         }
       }
 
-      // Chat messages
+      // *Chat messages
       &-messages {
         flex: 1 1 0;
         width: 100%;
@@ -530,7 +540,7 @@ i {
         }
       }
 
-      // Chat input
+      // *Chat input
       &-input {
         min-height: 60px;
         width: 100%;
@@ -572,7 +582,7 @@ i {
       .welcome-message {
         color: $chat-light-color;
         font-size: 15px;
-        background-color: $chat-dark-color;
+        background-color: rgba(0, 0, 0, 0.4);
         padding: 8px 16px;
         border-radius: 15px;
       }
