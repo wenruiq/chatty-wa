@@ -1,6 +1,6 @@
 import { elements } from './base';
 
-export const loadTopBar = currentUser => {
+export const renderTopBar = currentUser => {
   const { displayName, email, photoURL } = currentUser;
 
   const markup = `

@@ -12,10 +12,16 @@ export const elements = {
   loader: document.querySelector('.loader'),
   signOutBtn: document.querySelector('.sign-out-icon'),
   navColTopBar: document.querySelector('.nav-col-top-photo-and-info'),
+  searchInput: document.querySelector('.search-input'),
+  navColList: document.querySelector('.nav-col-list'),
+  chatColCover: document.querySelector('.chat-col-cover'),
+  chatCol: document.querySelector('.chat-col'),
+  chatColTop: document.querySelector('.chat-col-top'),
+  chatColMessages: document.querySelector('.chat-col-messages'),
+  typedMsgInput: document.querySelector('.typed-message-input'),
 };
 
-// * Reusable loaders and spinners
-
+// *Reusable loaders and spinners
 // *parent is the container, top is pixels to position loader from top of container
 export const renderLoader = (parent, top = false) => {
   const loader = `            
@@ -26,17 +32,22 @@ export const renderLoader = (parent, top = false) => {
   </div>`;
   parent.insertAdjacentHTML('afterbegin', loader);
   if (top) {
-    parent.childNodes[0].style.top = top;
+    parent.childNodes[1].firstElementChild.style.top = top;
   }
 };
-
 export const clearLoader = parent => {
-  if (parent.childNodes[0].className == 'loader') {
-    parent.removeChild(parent.childNodes[0]);
+  if (parent.childNodes[1].className == 'loader') {
+    parent.removeChild(parent.childNodes[1]);
   }
 };
-
 export const clearSpinner = () => {
   if (elements.spinner)
     elements.spinner.parentElement.removeChild(elements.spinner);
+};
+
+// *Converters
+export const convertHHMM = firetime => {
+  const hours = firetime.toDate().getHours();
+  const minutes = firetime.toDate().getMinutes();
+  return `${hours}:${minutes}`;
 };

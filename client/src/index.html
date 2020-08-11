@@ -12,11 +12,11 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-
     <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
     <title>Chatty Web</title>
   </head>
   <body>
+    <!-- *Loader markup -->
     <!-- <div class="loader-wrapper">
       <div class="loader">
         <div class="loader-inner"></div>
@@ -28,19 +28,18 @@
     <section id="main-wrapper">
       <div id="center-box">
         <div class="nav-col">
-          <!-- Nav top -->
+          <!-- *Nav top -->
           <div class="nav-col-top">
             <div class="nav-col-top-photo-and-info">
-              <!-- <img
-                src="assets/user-photo.jpg"
-                alt=""
-                class="profile-image-sm"
-              />
+              <!-- *Nav col top bar markup -->
+              <!-- <img src="assets/user-photo.jpg" alt="" class="profile-image-sm"/>
               <div class="user-info">
                 <div class="user-displayname">
                   Steve Rogers
                 </div>
-                <div class="user-email">steverogers1337@gmail.com</div>
+                <div class="user-email">
+                  steverogers1337@gmail.com
+                </div>
               </div> -->
             </div>
             <div class="nav-col-top-icons-tray">
@@ -48,7 +47,7 @@
               <i class="material-icons sign-out-icon">exit_to_app</i>
             </div>
           </div>
-          <!-- Nav search -->
+          <!-- *Nav search -->
           <div class="nav-col-search">
             <i class="material-icons search-icon">search</i>
             <input
@@ -60,15 +59,15 @@
             />
             <i class="material-icons clear-search-icon">clear</i>
           </div>
-          <!-- Nav chat/friend list -->
+          <!-- *Nav chat/friend list -->
           <div class="nav-col-list">
             <!-- <div class="loader">
               <div class="loader-inner">
                 <div class="loader-spinner"></div>
               </div>
             </div> -->
-            <!--
-            <a href="#" class="list-bar">
+            <!-- *List bar markup -->
+            <!-- <div class="list-bar" contactid="321321d3egj34ruogf">
               <div class="bar-img">
                 <img
                   src="assets/dummies/dummy1.png"
@@ -79,24 +78,29 @@
               <div class="bar-info">
                 <div class="bar-info-left">
                   <div class="bar-name">Pepe</div>
-                  <div class="bar-latest-msg">You pepega or wad</div>
+                  <div class="bar-latest-msg">
+                    <span class="bar-latest-msg-prefix">Pepe: </span>You are
+                    such a pepega
+                  </div>
                 </div>
-                <div class="bar-info-right">12:35</div>
+                <div class="bar-info-right">16:66</div>
               </div>
-            </a> -->
+            </div> -->
           </div>
         </div>
 
-        <!-- Chat col -->
+        <!-- *Chat col -->
         <div class="chat-col">
-          <div class="start-up">
+          <!-- *Chat cover -->
+          <div class="chat-col-cover">
             <div class="welcome-message">
-              Welcome to chatty! Choose a chat and start messaging!
+              Select a chat on the left to begin messaging!
             </div>
           </div>
-          <!-- Chat top -->
+          <!-- *Chat top -->
           <div class="chat-col-top">
-            <div class="chat-col-top-photo-and-info">
+            <!-- *Chat top markup -->
+            <!-- <div class="chat-col-top-photo-and-info">
               <img
                 src="assets/dummies/dummy2.png"
                 alt=""
@@ -105,12 +109,11 @@
               <div class="chat-info">
                 <div class="chat-name">Jimmy McGill</div>
               </div>
-            </div>
+            </div> -->
           </div>
-
-          <!-- Chat messages box -->
+          <!-- *Chat messages box -->
           <div class="chat-col-messages">
-            <div class="bubble-incoming">
+            <!-- <div class="bubble-incoming">
               <div class="message-sender">Jimmy</div>
               <div class="message-content">
                 short message?
@@ -124,34 +127,10 @@
               </div>
               <div class="message-time">14:30</div>
               <div class="tail-out"></div>
-            </div>
-            <div class="bubble-outgoing">
-              <div class="message-content">
-                hello...
-              </div>
-              <div class="message-time">14:30</div>
-              <div class="tail-out"></div>
-            </div>
-            <div class="bubble-outgoing">
-              <div class="message-content">
-                Medium message lols. Medium message lols. Medium message lols.
-                Medium message lols.
-              </div>
-              <div class="message-time">14:30</div>
-              <div class="tail-out"></div>
-            </div>
-            <div class="bubble-incoming">
-              <div class="message-sender">Jimmy</div>
-              <div class="message-content">
-                long ass message? long ass message? long ass message? long ass
-                message?
-              </div>
-              <div class="message-time">13:42</div>
-              <div class="tail-in"></div>
-            </div>
+            </div> -->
           </div>
 
-          <!-- Chat input -->
+          <!-- *Chat input -->
           <div class="chat-col-input">
             <input
               type="text"

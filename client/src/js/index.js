@@ -1,33 +1,149 @@
 import { signInWithGoogle } from './firebase/firebase.utils';
 import { auth, createUserDocument } from './firebase/firebase.utils';
 
-import { elements, clearSpinner } from './views/base';
+import {
+  elements,
+  clearSpinner,
+  renderLoader,
+  clearLoader,
+} from './views/base';
+
+import Search from './models/Search';
+import Contacts from './models/Contacts';
+import Chat from './models/Chat';
 
 import * as loginView from './views/loginView';
+import * as searchView from './views/searchView';
+import * as contactsView from './views/contactsView';
+import * as chatView from './views/chatView';
 
-const state = {};
+const state = { contactSelected: null };
+
+// ? Why is state always updated even though I logged it at the start ?
+// !Console log TBR
+console.log('%cCurrent state:', 'color:purple; font-weight: bold');
+console.log({ state });
+
 
 // *Control login (initializes retrieval of data)
 const controlLogin = () => {
-  // todo: get user data from state
-  // todo: load nav col top bar
+  // *Load nav col top bar
   if (state.currentUser) {
-    loginView.loadTopBar(state.currentUser);
+    loginView.renderTopBar(state.currentUser);
   }
 
-  // todo: get list of contacts
-  // todo: load contacts
+  // *Get contacts
+  controlContacts();
 };
 
-// *Control contacts
-const controlContacts = () => {};
-
+// todo: incomplete control search
 // *Control search
-const controlSearch = async () => {};
+const controlSearch = async () => {
+  // *Get input from search input
+  const query = searchView.getInput();
+
+  if (query) {
+    // *Add to state
+    state.search = new Search(query.toLowerCase());
+
+    try {
+      await state.search.getResults();
+    } catch (error) {
+      console.log(
+        '%c search.getResults() error...',
+        'color: red; font-weight: bold'
+      );
+      console.error(error);
+    }
+  }
+};
+// *Event listener for search
+elements.searchInput.addEventListener('keypress', e => {
+  if (e.key === 'Enter') {
+    controlSearch();
+  }
+});
+
+// *Control contacts
+const controlContacts = async () => {
+  // *Render loader in nav-col-list
+  renderLoader(elements.navColList, '40px');
+
+  // *Get current user id from state
+  const currentUserID = state.currentUser.id;
+
+  if (currentUserID) {
+    // *Add to state
+    state.contacts = new Contacts(currentUserID);
+    try {
+      // *Get all contacts from firestore
+      await state.contacts.getContacts();
+      // !Console log TBR
+      console.log('%cAll my contacts:', 'color: blue; font-weight: bold;');
+      console.log(state.contacts.data);
+      // *Clear loader from nav-col-list
+      clearLoader(elements.navColList);
+      // *Render contacts
+      contactsView.renderContacts(state.contacts);
+    } catch (error) {
+      console.log(
+        '%c contacts.getContacts() error...',
+        'color: red; font-weight: bold'
+      );
+      console.error(error);
+    }
+  }
+};
+
+// *Control chat
+const controlChat = async contactID => {
+  state.chat = new Chat(contactID);
+
+  // todo: highlight selected chat
+  chatView.highlightSelectedContact(state.contactSelected);
+
+  // todo: render chat-col-top
+  chatView.renderTopBar(state.chat.contactID, state.contacts.data);
+
+  // todo: remove start-up cover
+  chatView.removeCover();
+
+  // todo: render loader in chat-col-messages
+
+  // todo: fetch messages
+  // todo: remove loader
+  // todo: render messages
+};
+
+// *Event listener for click on contact
+elements.navColList.addEventListener('click', e => {
+  // todo: state should be aware when the list rendered is search resutlts
+  // todo: only perform controlChat if !state.isSearch
+
+  // *Get contactID of selected chat room
+  const contactClicked = e.target.closest('.list-bar');
+  if (contactClicked) {
+    const contactID = contactClicked.getAttribute('contactid');
+    // !Console log TBR
+    console.log(
+      '%cClick detected on chat room with id:',
+      'color: green; font-weight: bold'
+    );
+    console.log(contactID);
+    // *Prevent fetching data twice
+    if (state.contactSelected !== contactID) {
+      state.contactSelected = contactID;
+      controlChat(contactID);
+    }
+    // *Pass clicked contactID to chat controller
+  }
+});
 
 // *Handle firebase sign in authentications
 auth.onAuthStateChanged(async userAuth => {
   if (userAuth) {
+    // !Console log TBR
+    console.log('%cUserAuth object:', 'color: DarkCyan; font-weight:bold');
     console.log({ userAuth });
     // *Check if this was a sign up
     const displayName = localStorage.getItem('displayName');
@@ -36,6 +152,7 @@ auth.onAuthStateChanged(async userAuth => {
       const userRef = await createUserDocument(userAuth, { displayName });
       localStorage.setItem('displayName', null);
     }
+
     const userRef = await createUserDocument(userAuth);
 
     userRef.onSnapshot(snapShot => {
@@ -43,7 +160,6 @@ auth.onAuthStateChanged(async userAuth => {
         id: snapShot.id,
         ...snapShot.data(),
       };
-      console.log({ state });
       clearSpinner();
       controlLogin();
     });

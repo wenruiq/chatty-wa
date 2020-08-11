@@ -12,7 +12,18 @@ const config = {
   appId: '1:693027905253:web:55fb22096e2a00bf817e0c',
 };
 
-// Create user doc in firestore if first time login with google
+firebase.initializeApp(config);
+
+// *Main exports
+export const auth = firebase.auth();
+export const firestore = firebase.firestore();
+
+// *Authentication related stuff
+const provider = new firebase.auth.GoogleAuthProvider();
+provider.setCustomParameters({ prompt: 'select_account' });
+export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+// *Create user doc in firestore if first time login with google
 export const createUserDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
@@ -22,9 +33,23 @@ export const createUserDocument = async (userAuth, additionalData) => {
   // Then perform CRUD
   const snapShot = await userRef.get();
 
+  // ! This must be "if(!snapShot.exists)", we only do "if(snapShot.exists)" for testing purpose
   if (!snapShot.exists) {
     const { displayName, email, photoURL } = userAuth;
     const createdAt = new Date();
+
+    // *Populate search terms
+    const searchTerms = [];
+    searchTerms.push(email.split('@')[0]);
+    const nameChunks = displayName.split(' ');
+    for (var chunk of nameChunks) {
+      searchTerms.push(chunk.toLowerCase());
+      if (chunk.length > 3) {
+        for (var i = 3; i < chunk.length + 1; i++) {
+          searchTerms.push(chunk.substring(0, i).toLowerCase());
+        }
+      }
+    }
 
     try {
       await userRef.set({
@@ -32,6 +57,7 @@ export const createUserDocument = async (userAuth, additionalData) => {
         email,
         createdAt,
         photoURL,
+        searchTerms,
         ...additionalData,
       });
     } catch (err) {
@@ -42,13 +68,12 @@ export const createUserDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-firebase.initializeApp(config);
-
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
-
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+// *Convert collectionSnapShot to array of maps
+export const collectionToMapsArray = collectionSnapShot => {
+  return collectionSnapShot.docs.map(doc => {
+    console.log(doc.id);
+    return { contactID: doc.id, ...doc.data() };
+  });
+};
 
 export default firebase;
