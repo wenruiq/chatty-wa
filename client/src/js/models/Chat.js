@@ -1,9 +1,20 @@
-import { firestore } from '../firebase/firebase.utils';
+import { firestore, collectionToMapsArray } from '../firebase/firebase.utils';
 
 export default class Chat {
-  constructor(contactID) {
+  constructor(contactID, currentUserID) {
     this.contactID = contactID;
+    this.currentUserID = currentUserID;
   }
 
-  getMessages() {}
+  async getMessages() {
+    const messagesRef = firestore.collection(
+      `users/${this.currentUserID}/contacts/${this.contactID}/messages`
+    );
+    try {
+      const collectionSnapShot = await messagesRef.get();
+      this.data = collectionToMapsArray(collectionSnapShot);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

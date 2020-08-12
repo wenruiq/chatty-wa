@@ -19,24 +19,21 @@ import * as chatView from './views/chatView';
 
 const state = { contactSelected: null };
 
-// ? Why is state always updated even though I logged it at the start ?
 // !Console log TBR
 console.log('%cCurrent state:', 'color:purple; font-weight: bold');
 console.log({ state });
 
-
-// *Control login (initializes retrieval of data)
+// *Control login (render nav-col-top & exec controlContacts)
 const controlLogin = () => {
   // *Load nav col top bar
   if (state.currentUser) {
     loginView.renderTopBar(state.currentUser);
   }
-
   // *Get contacts
   controlContacts();
 };
 
-// todo: incomplete control search
+// todo: finish control search
 // *Control search
 const controlSearch = async () => {
   // *Get input from search input
@@ -78,11 +75,14 @@ const controlContacts = async () => {
     try {
       // *Get all contacts from firestore
       await state.contacts.getContacts();
+
       // !Console log TBR
       console.log('%cAll my contacts:', 'color: blue; font-weight: bold;');
       console.log(state.contacts.data);
+
       // *Clear loader from nav-col-list
       clearLoader(elements.navColList);
+
       // *Render contacts
       contactsView.renderContacts(state.contacts);
     } catch (error) {
@@ -97,22 +97,35 @@ const controlContacts = async () => {
 
 // *Control chat
 const controlChat = async contactID => {
-  state.chat = new Chat(contactID);
+  state.chat = new Chat(contactID, state.currentUser.id);
 
-  // todo: highlight selected chat
+  // *Highlight selected chat & de-select previous chat
   chatView.highlightSelectedContact(state.contactSelected);
 
-  // todo: render chat-col-top
+  // *Render chat-col-top
   chatView.renderTopBar(state.chat.contactID, state.contacts.data);
 
-  // todo: remove start-up cover
+  // *Remove startup cover
   chatView.removeCover();
 
-  // todo: render loader in chat-col-messages
+  // todo: make better looking loader?
+  renderLoader(elements.chatColMessages, '100px');
 
-  // todo: fetch messages
-  // todo: remove loader
-  // todo: render messages
+  try {
+    // *Get all messages pertaining this contact
+    await state.chat.getMessages();
+    console.log({ stateChatData: state.chat.data });
+    // *Remove loader
+    clearLoader(elements.chatColMessages);
+    // todo: render messages
+    chatView.renderMessages(state.chat);
+  } catch (error) {
+    console.log(
+      '%c contacts.getMessages() error...',
+      'color: red; font-weight: bold'
+    );
+    console.error(error);
+  }
 };
 
 // *Event listener for click on contact

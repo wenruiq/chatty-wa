@@ -1,4 +1,4 @@
-import { elements } from './base';
+import { elements, convertHHMM } from './base';
 
 export const removeCover = () => {
   const cover = elements.chatColCover;
@@ -41,4 +41,34 @@ export const renderTopBar = (contactID, allContacts) => {
     elements.chatColTop.innerHTML = '';
     elements.chatColTop.insertAdjacentHTML('afterbegin', markup);
   }
+};
+
+export const renderMessages = ({ currentUserID, data }) => {
+  data.forEach(message => {
+    const { senderID, senderName, msgTime, msgContent } = message;
+    const formattedTime = convertHHMM(msgTime);
+    if (senderID === currentUserID) {
+      var markup = `
+      <div class="bubble-outgoing">
+        <div class="message-content">
+          ${msgContent}
+        </div>
+        <div class="message-time">${formattedTime}</div>
+        <div class="tail-out"></div>
+      </div>
+      `;
+    } else {
+      var markup = `
+      <div class="bubble-incoming">
+        <div class="message-sender">${senderName}</div>
+        <div class="message-content">
+          ${msgContent}
+        </div>
+        <div class="message-time">${formattedTime}</div>
+        <div class="tail-in"></div>
+      </div> 
+      `;
+    }
+    elements.chatColMessages.insertAdjacentHTML('beforeend', markup);
+  });
 };

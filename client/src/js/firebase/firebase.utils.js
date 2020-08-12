@@ -71,7 +71,6 @@ export const createUserDocument = async (userAuth, additionalData) => {
 // *Convert collectionSnapShot to array of maps
 export const collectionToMapsArray = collectionSnapShot => {
   return collectionSnapShot.docs.map(doc => {
-    console.log(doc.id);
     return { contactID: doc.id, ...doc.data() };
   });
 };
