@@ -1,5 +1,6 @@
 import { signInWithGoogle } from './firebase/firebase.utils';
 import { auth, createUserDocument } from './firebase/firebase.utils';
+import io from 'socket.io-client';
 
 import {
   elements,
@@ -31,6 +32,8 @@ const controlLogin = () => {
   }
   // *Get contacts
   controlContacts();
+  // *Connect to sockets
+  controlSockets();
 };
 
 // todo: finish control search
@@ -117,7 +120,7 @@ const controlChat = async contactID => {
     console.log({ stateChatData: state.chat.data });
     // *Remove loader
     clearLoader(elements.chatColMessages);
-    // todo: render messages
+    // *Render messages
     chatView.renderMessages(state.chat);
   } catch (error) {
     console.log(
@@ -130,7 +133,7 @@ const controlChat = async contactID => {
 
 // *Event listener for click on contact
 elements.navColList.addEventListener('click', e => {
-  // todo: state should be aware when the list rendered is search resutlts
+  // todo: state should be aware when the list rendered is search results
   // todo: only perform controlChat if !state.isSearch
 
   // *Get contactID of selected chat room
@@ -151,6 +154,15 @@ elements.navColList.addEventListener('click', e => {
     // *Pass clicked contactID to chat controller
   }
 });
+
+// *Control socket
+const controlSockets = () => {
+  const ENDPOINT = 'localhost:5000';
+
+  let socket = io(ENDPOINT);
+
+  socket.emit('test', 'Hello testing yo!');
+};
 
 // *Handle firebase sign in authentications
 auth.onAuthStateChanged(async userAuth => {
