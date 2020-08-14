@@ -19,12 +19,15 @@ import * as contactsView from './views/contactsView';
 import * as chatView from './views/chatView';
 
 const state = { contactSelected: null };
-
 // !Console log TBR
 console.log('%cCurrent state:', 'color:purple; font-weight: bold');
 console.log({ state });
 
-// *Control login (render nav-col-top & exec controlContacts)
+// *Connect to socket endpoint
+const ENDPOINT = 'localhost:5000';
+let socket = io(ENDPOINT);
+
+// *Control login (render nav-col-top, load contacts, connect to socket endpoint)
 const controlLogin = () => {
   // *Load nav col top bar
   if (state.currentUser) {
@@ -32,8 +35,10 @@ const controlLogin = () => {
   }
   // *Get contacts
   controlContacts();
-  // *Connect to sockets
-  controlSockets();
+
+  // *Sockets
+  controlSocket();
+
 };
 
 // todo: finish control search
@@ -140,28 +145,33 @@ elements.navColList.addEventListener('click', e => {
   const contactClicked = e.target.closest('.list-bar');
   if (contactClicked) {
     const contactID = contactClicked.getAttribute('contactid');
-    // !Console log TBR
-    console.log(
-      '%cClick detected on chat room with id:',
-      'color: green; font-weight: bold'
-    );
-    console.log(contactID);
     // *Prevent fetching data twice
     if (state.contactSelected !== contactID) {
       state.contactSelected = contactID;
       controlChat(contactID);
     }
-    // *Pass clicked contactID to chat controller
   }
 });
 
-// *Control socket
-const controlSockets = () => {
-  const ENDPOINT = 'localhost:5000';
+// *Control message
+const controlMessage = () => {
+  const msg = chatView.getInput();
+  socket.emit('test', msg);
 
-  let socket = io(ENDPOINT);
+}
 
-  socket.emit('test', 'Hello testing yo!');
+elements.typedMsgInput.addEventListener('keypress', e => {
+  if (e.key === "Enter") {
+    controlMessage();
+  }
+})
+
+// todo: Control socket (configure sockets stuff...)
+const controlSocket = () => {
+  console.log("controlled socket");
+  socket.on("chat-message", msg => {
+    console.log(msg);
+  })
 };
 
 // *Handle firebase sign in authentications

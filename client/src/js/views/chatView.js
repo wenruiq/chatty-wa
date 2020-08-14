@@ -1,5 +1,7 @@
 import { elements, convertHHMM } from './base';
 
+export const getInput = () => elements.typedMsgInput.value;
+
 export const removeCover = () => {
   const cover = elements.chatColCover;
   if (cover.parentElement) {

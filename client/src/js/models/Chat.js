@@ -9,7 +9,7 @@ export default class Chat {
   async getMessages() {
     const messagesRef = firestore.collection(
       `users/${this.currentUserID}/contacts/${this.contactID}/messages`
-    );
+    ).orderBy("msgTime");
     try {
       const collectionSnapShot = await messagesRef.get();
       this.data = collectionToMapsArray(collectionSnapShot);
