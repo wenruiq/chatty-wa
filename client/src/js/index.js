@@ -12,6 +12,7 @@ import {
 import Search from './models/Search';
 import Contacts from './models/Contacts';
 import Chat from './models/Chat';
+import SocketUpdate from './models/SocketUpdate';
 
 import * as loginView from './views/loginView';
 import * as searchView from './views/searchView';
@@ -23,12 +24,16 @@ const state = { contactSelected: null };
 console.log('%cCurrent state:', 'color:purple; font-weight: bold');
 console.log({ state });
 
-// *Connect to socket endpoint
-const ENDPOINT = 'localhost:5000';
-let socket = io(ENDPOINT);
+
 
 // *Control login (render nav-col-top, load contacts, connect to socket endpoint)
 const controlLogin = () => {
+
+  // *Connect to socket endpoint
+  //! how to reach this socket? might need to put above controlLogin again...
+  const ENDPOINT = 'localhost:5000';
+  state.socket = io(ENDPOINT);
+
   // *Load nav col top bar
   if (state.currentUser) {
     loginView.renderTopBar(state.currentUser);
@@ -156,7 +161,9 @@ elements.navColList.addEventListener('click', e => {
 // *Control message
 const controlMessage = () => {
   const msg = chatView.getInput();
-  socket.emit('test', msg);
+  // todo: get chat selected id from state
+  // todo: get his socket id
+  // todo: emit to "message", pass in his socket id, my msg
 
 }
 
@@ -167,37 +174,55 @@ elements.typedMsgInput.addEventListener('keypress', e => {
 })
 
 // todo: Control socket (configure sockets stuff...)
-const controlSocket = () => {
-  console.log("controlled socket");
-  socket.on("chat-message", msg => {
-    console.log(msg);
-  })
+const controlSocket = async () => {
+  // todo: update firestore with my newest socket id
+  // *Update firestore with my latest socketID (socket ID changes with page reload)
+  if (state.currentUser) {
+    const myUserID = state.currentUser.id;
+    state.socketUpdate = new SocketUpdate(myUserID, state.socket.id);
+    try {
+      await state.socketUpdate.updateSocketID();
+    } catch (error) {
+      console.log(
+        '%c state.socketUpdate.updateSocketID() error...',
+        'color: red; font-weight: bold'
+      );
+      console.error(error);
+    }
+  }
+
 };
 
+// ! Have to think of a way to trigger this safely whenever data is updated in firestore.
 // *Handle firebase sign in authentications
 auth.onAuthStateChanged(async userAuth => {
-  if (userAuth) {
-    // !Console log TBR
-    console.log('%cUserAuth object:', 'color: DarkCyan; font-weight:bold');
-    console.log({ userAuth });
-    // *Check if this was a sign up
-    const displayName = localStorage.getItem('displayName');
-    if (displayName) {
-      // *Sign up process
-      const userRef = await createUserDocument(userAuth, { displayName });
-      localStorage.setItem('displayName', null);
+  // !this if statement is probably not good, can revert everything back to Socket instead of SocketUpdate model
+  if (!state.socket) {
+    if (userAuth) {
+      // !Console log TBR
+      console.log('%cUserAuth object:', 'color: DarkCyan; font-weight:bold');
+      console.log({ userAuth });
+      // *Check if this was a sign up
+      const displayName = localStorage.getItem('displayName');
+      if (displayName) {
+        // *Sign up process
+        const userRef = await createUserDocument(userAuth, { displayName });
+        localStorage.setItem('displayName', null);
+      }
+
+      const userRef = await createUserDocument(userAuth);
+
+      userRef.onSnapshot(snapShot => {
+        state.currentUser = {
+          id: snapShot.id,
+          ...snapShot.data(),
+        };
+        console.log("on snapshot leh...");
+        clearSpinner();
+        controlLogin();
+      });
     }
 
-    const userRef = await createUserDocument(userAuth);
-
-    userRef.onSnapshot(snapShot => {
-      state.currentUser = {
-        id: snapShot.id,
-        ...snapShot.data(),
-      };
-      clearSpinner();
-      controlLogin();
-    });
   }
 
   // *If not logged in/signed out, redirects to login page

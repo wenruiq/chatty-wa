@@ -27,10 +27,10 @@ export const signInWithGoogle = () => auth.signInWithPopup(provider);
 export const createUserDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
-  // Always get doc reference first
+  // *Always get doc reference first
   const userRef = firestore.doc(`users/${userAuth.uid}`);
 
-  // Then perform CRUD
+  // *Then perform CRUD
   const snapShot = await userRef.get();
 
   // ! This must be "if(!snapShot.exists)", we only do "if(snapShot.exists)" for testing purpose

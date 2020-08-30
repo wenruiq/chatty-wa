@@ -13,11 +13,6 @@ const io = socketio(server);
 
 io.on('connection', socket => {
 
-  socket.on('test', msg => {
-    socket.emit('chat-message', "hello World");
-
-    console.log(msg);
-  });
 });
 
 app.use(router);

@@ -35,14 +35,18 @@ export const renderLoader = (parent, top = false) => {
     parent.childNodes[1].firstElementChild.style.top = top;
   }
 };
+// *Loader is for smaller containers
 export const clearLoader = parent => {
   if (parent.childNodes[1].className == 'loader') {
     parent.removeChild(parent.childNodes[1]);
   }
 };
+// *Spinner handles loading at page start
 export const clearSpinner = () => {
-  if (elements.spinner)
+  if (elements.spinner && elements.spinner.parentElement) {
+    console.log("cleared");
     elements.spinner.parentElement.removeChild(elements.spinner);
+  }
 };
 
 // *Converters
