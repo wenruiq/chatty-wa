@@ -1,7 +1,9 @@
+// *Firebase and socketio imports
 import { signInWithGoogle } from './firebase/firebase.utils';
 import { auth, createUserDocument } from './firebase/firebase.utils';
 import io from 'socket.io-client';
 
+// *Utilities import
 import {
   elements,
   clearSpinner,
@@ -9,44 +11,46 @@ import {
   clearLoader,
 } from './views/base';
 
+// *Models import
 import Search from './models/Search';
 import Contacts from './models/Contacts';
 import Chat from './models/Chat';
-import SocketUpdate from './models/SocketUpdate';
+import Socket from './models/Socket';
 
+// *Views import
 import * as loginView from './views/loginView';
 import * as searchView from './views/searchView';
 import * as contactsView from './views/contactsView';
 import * as chatView from './views/chatView';
+import Message from './models/Message';
 
+// *Initiate state
 const state = { contactSelected: null };
-// !Console log TBR
+// !Console log TBR (To Be Removed)
 console.log('%cCurrent state:', 'color:purple; font-weight: bold');
 console.log({ state });
 
+// *Connect to socket endpoint
+const ENDPOINT = 'localhost:5000';
+var socket = io(ENDPOINT);
 
+// !Console log TBR (To Be Removed)
+console.log('%cCurrent socket:', 'color:maroon; font-weight: bold');
+console.log({ socket });
 
 // *Control login (render nav-col-top, load contacts, connect to socket endpoint)
 const controlLogin = () => {
-
-  // *Connect to socket endpoint
-  //! how to reach this socket? might need to put above controlLogin again...
-  const ENDPOINT = 'localhost:5000';
-  state.socket = io(ENDPOINT);
-
   // *Load nav col top bar
   if (state.currentUser) {
     loginView.renderTopBar(state.currentUser);
   }
-  // *Get contacts
-  controlContacts();
-
-  // *Sockets
-  controlSocket();
-
+  // *Get contacts once (when socket hasn't been updated)
+  if (!state.socket) {
+    controlContacts();
+  }
 };
 
-// todo: finish control search
+// todo: Control search & adding contacts
 // *Control search
 const controlSearch = async () => {
   // *Get input from search input
@@ -73,8 +77,10 @@ elements.searchInput.addEventListener('keypress', e => {
     controlSearch();
   }
 });
+// todo: when adding contact, need to create the subcollections
+// todo: users/contacts/messages
 
-// *Control contacts
+// *Control contacts (Get contacts)
 const controlContacts = async () => {
   // *Render loader in nav-col-list
   renderLoader(elements.navColList, '40px');
@@ -106,6 +112,8 @@ const controlContacts = async () => {
       console.error(error);
     }
   }
+  //
+  controlSocket();
 };
 
 // *Control chat
@@ -140,7 +148,6 @@ const controlChat = async contactID => {
     console.error(error);
   }
 };
-
 // *Event listener for click on contact
 elements.navColList.addEventListener('click', e => {
   // todo: state should be aware when the list rendered is search results
@@ -159,29 +166,46 @@ elements.navColList.addEventListener('click', e => {
 });
 
 // *Control message
-const controlMessage = () => {
-  const msg = chatView.getInput();
+const controlMessage = async () => {
   // todo: get chat selected id from state
-  // todo: get his socket id
-  // todo: emit to "message", pass in his socket id, my msg
+  const hisUserID = state.contactSelected;
+  const msgContent = chatView.getInput();
+  const msgTime = new Date();
+  const senderID = state.currentUser.id;
+  const senderName = state.currentUser.displayName;
+  const receiverID = hisUserID;
+  const msg = { msgContent, msgTime, senderID, senderName, receiverID };
+  console.log({ msg });
+  state.message = new Message(hisUserID, senderID, msg);
+  try {
+    await state.message.sendMessageToDB();
+  } catch (err) {
+    console.log(err);
+  }
 
-}
-
+  // todo: Get his socket ID and emit message via socket
+  try {
+    await state.message.getSocketID();
+    const hisSocketID = state.message.hisSocketID;
+    socket.emit('message', hisSocketID, msg);
+  } catch (err) {
+    console.log(err);
+  }
+};
 elements.typedMsgInput.addEventListener('keypress', e => {
-  if (e.key === "Enter") {
+  if (e.key === 'Enter') {
     controlMessage();
   }
-})
+});
 
-// todo: Control socket (configure sockets stuff...)
+// *Control socket
 const controlSocket = async () => {
-  // todo: update firestore with my newest socket id
   // *Update firestore with my latest socketID (socket ID changes with page reload)
   if (state.currentUser) {
     const myUserID = state.currentUser.id;
-    state.socketUpdate = new SocketUpdate(myUserID, state.socket.id);
+    state.socket = new Socket(myUserID, socket.id);
     try {
-      await state.socketUpdate.updateSocketID();
+      await state.socket.updateSocketID();
     } catch (error) {
       console.log(
         '%c state.socketUpdate.updateSocketID() error...',
@@ -189,40 +213,42 @@ const controlSocket = async () => {
       );
       console.error(error);
     }
+    
+    // todo: set up msg receiver
+    socket.on('message receiver', msg => {
+      console.log('%c Message received at socket:', 'color: green');
+      console.log(msg);
+    })
   }
-
 };
 
-// ! Have to think of a way to trigger this safely whenever data is updated in firestore.
 // *Handle firebase sign in authentications
 auth.onAuthStateChanged(async userAuth => {
-  // !this if statement is probably not good, can revert everything back to Socket instead of SocketUpdate model
-  if (!state.socket) {
-    if (userAuth) {
-      // !Console log TBR
-      console.log('%cUserAuth object:', 'color: DarkCyan; font-weight:bold');
-      console.log({ userAuth });
-      // *Check if this was a sign up
-      const displayName = localStorage.getItem('displayName');
-      if (displayName) {
-        // *Sign up process
-        const userRef = await createUserDocument(userAuth, { displayName });
-        localStorage.setItem('displayName', null);
-      }
-
-      const userRef = await createUserDocument(userAuth);
-
-      userRef.onSnapshot(snapShot => {
-        state.currentUser = {
-          id: snapShot.id,
-          ...snapShot.data(),
-        };
-        console.log("on snapshot leh...");
-        clearSpinner();
-        controlLogin();
-      });
+  if (userAuth) {
+    // !Console log TBR
+    console.log('%cUserAuth object:', 'color: DarkCyan; font-weight:bold');
+    console.log({ userAuth });
+    // *Check if this was a sign up
+    const displayName = localStorage.getItem('displayName');
+    if (displayName) {
+      // *Sign up process
+      const userRef = await createUserDocument(userAuth, { displayName });
+      localStorage.setItem('displayName', null);
     }
 
+    // *Create user document in firestore if user doesn't exist yet
+    const userRef = await createUserDocument(userAuth);
+    // ?Is it necessary to controlLogin() everytime userRef changes?
+    userRef.onSnapshot(snapShot => {
+      state.currentUser = {
+        id: snapShot.id,
+        ...snapShot.data(),
+      };
+      console.log('%c userRef.onSnapshot fired.', 'color:cyan');
+      // *Clear main spinner after getting current user data
+      clearSpinner();
+      controlLogin();
+    });
   }
 
   // *If not logged in/signed out, redirects to login page

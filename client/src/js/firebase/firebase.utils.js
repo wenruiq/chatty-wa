@@ -26,18 +26,12 @@ export const signInWithGoogle = () => auth.signInWithPopup(provider);
 // *Create user doc in firestore if first time login with google
 export const createUserDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
-
-  // *Always get doc reference first
   const userRef = firestore.doc(`users/${userAuth.uid}`);
-
-  // *Then perform CRUD
   const snapShot = await userRef.get();
-
   // ! This must be "if(!snapShot.exists)", we only do "if(snapShot.exists)" for testing purpose
   if (!snapShot.exists) {
     const { displayName, email, photoURL } = userAuth;
     const createdAt = new Date();
-
     // *Populate search terms
     const searchTerms = [];
     searchTerms.push(email.split('@')[0]);
@@ -50,7 +44,6 @@ export const createUserDocument = async (userAuth, additionalData) => {
         }
       }
     }
-
     try {
       await userRef.set({
         displayName,
@@ -64,7 +57,6 @@ export const createUserDocument = async (userAuth, additionalData) => {
       console.log('error creating user', err.message);
     }
   }
-
   return userRef;
 };
 

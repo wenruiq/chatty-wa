@@ -14,6 +14,8 @@ export const renderTopBar = currentUser => {
     </div>
   </div>
   `;
-  
-  elements.navColTopBar.insertAdjacentHTML('afterbegin', markup);
+  // *Only render once
+  if (!elements.navColTopBar.firstElementChild) {
+    elements.navColTopBar.insertAdjacentHTML('afterbegin', markup);
+  }
 };

@@ -12,7 +12,9 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 io.on('connection', socket => {
-
+  socket.on('message', (id, msg)=>{
+    socket.to(id).emit('message receiver', msg);
+  })
 });
 
 app.use(router);
