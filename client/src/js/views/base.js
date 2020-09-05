@@ -54,6 +54,6 @@ export const clearSpinner = () => {
 // *Converters
 export const convertHHMM = firetime => {
   const hours = firetime.toDate().getHours();
-  const minutes = firetime.toDate().getMinutes();
+  const minutes = firetime.toDate().getMinutes().toString().length == 2 ? firetime.toDate().getMinutes() : `0${firetime.toDate().getMinutes()}`;
   return `${hours}:${minutes}`;
 };

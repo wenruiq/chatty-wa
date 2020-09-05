@@ -45,32 +45,39 @@ export const renderTopBar = (contactID, allContacts) => {
   }
 };
 
+// *Render all messages (Done when fetching from firestore)
 export const renderMessages = ({ currentUserID, data }) => {
   data.forEach(message => {
-    const { senderID, senderName, msgTime, msgContent } = message;
-    const formattedTime = convertHHMM(msgTime);
-    if (senderID === currentUserID) {
-      var markup = `
-      <div class="bubble-outgoing">
-        <div class="message-content">
-          ${msgContent}
-        </div>
-        <div class="message-time">${formattedTime}</div>
-        <div class="tail-out"></div>
-      </div>
-      `;
-    } else {
-      var markup = `
-      <div class="bubble-incoming">
-        <div class="message-sender">${senderName}</div>
-        <div class="message-content">
-          ${msgContent}
-        </div>
-        <div class="message-time">${formattedTime}</div>
-        <div class="tail-in"></div>
-      </div> 
-      `;
-    }
-    elements.chatColMessages.insertAdjacentHTML('beforeend', markup);
+    renderMessage(message, currentUserID);
   });
 };
+
+// *Render one message (Used both as a helper method for the function above and to render latest msg at socket)
+export const renderMessage = (msg, currentUserID) => {
+  const { senderID, senderName, msgTime, msgContent, receiverID } = msg;
+  const formattedTime = convertHHMM(msgTime);
+  if (senderID === currentUserID) {
+    var markup = `
+    <div class="bubble-outgoing">
+      <div class="message-content">
+        ${msgContent}
+      </div>
+      <div class="message-time">${formattedTime}</div>
+      <div class="tail-out"></div>
+    </div>
+    `;
+  } else {
+    var markup = `
+    <div class="bubble-incoming">
+      <div class="message-sender">${senderName}</div>
+      <div class="message-content">
+        ${msgContent}
+      </div>
+      <div class="message-time">${formattedTime}</div>
+      <div class="tail-in"></div>
+    </div> 
+    `;
+  }
+  elements.chatColMessages.insertAdjacentHTML('beforeend', markup);
+  elements.chatColMessages.scrollTop = elements.chatColMessages.scrollHeight;
+}

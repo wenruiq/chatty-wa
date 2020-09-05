@@ -213,11 +213,13 @@ const controlSocket = async () => {
       );
       console.error(error);
     }
-    
-    // todo: set up msg receiver
+
+    // todo: Message receiver, appends message to UI accordingly
     socket.on('message receiver', msg => {
       console.log('%c Message received at socket:', 'color: green');
       console.log(msg);
+      chatView.renderMessage(msg, state.currentUser.id);``
+
     })
   }
 };
