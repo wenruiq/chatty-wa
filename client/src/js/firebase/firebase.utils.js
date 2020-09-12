@@ -30,11 +30,18 @@ export const createUserDocument = async (userAuth, additionalData) => {
   const snapShot = await userRef.get();
   // ! This must be "if(!snapShot.exists)", we only do "if(snapShot.exists)" for testing purpose
   if (!snapShot.exists) {
-    const { displayName, email, photoURL } = userAuth;
+    let { displayName, email, photoURL } = userAuth;
     const createdAt = new Date();
     // *Populate search terms
     const searchTerms = [];
+    searchTerms.push(email);
     searchTerms.push(email.split('@')[0]);
+    if (!displayName) {
+      displayName = additionalData.displayName;
+    }
+    if (!photoURL) {
+      photoURL = "https://user-images.githubusercontent.com/58852708/92991614-b8b2cd00-f517-11ea-8dba-90db328d2892.png";
+    }
     const nameChunks = displayName.split(' ');
     for (var chunk of nameChunks) {
       searchTerms.push(chunk.toLowerCase());

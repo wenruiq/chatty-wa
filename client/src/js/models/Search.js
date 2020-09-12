@@ -13,6 +13,9 @@ export default class Search {
       snapShot.forEach(doc => {
         console.log(doc.id, ' => ', doc.data());
       });
+      this.data = snapShot.docs.map(doc => {
+        return { userID: doc.id, ...doc.data() }
+      });
     } catch (error) {
       console.error(error);
     }

@@ -1,38 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/main.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
-    <title>Chatty Web</title>
-  </head>
-  <body>
-    <!-- *Loader markup -->
-    <!-- <div class="loader-wrapper">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
+  <title>Chatty Web</title>
+</head>
+
+<body>
+  <!-- *Loader markup -->
+  <!-- <div class="loader-wrapper">
       <div class="loader">
         <div class="loader-inner"></div>
       </div>
     </div> -->
-    <div class="spinner-wrapper">
-      <div class="spinner"></div>
-    </div>
-    <section id="main-wrapper">
-      <div id="center-box">
-        <div class="nav-col">
-          <!-- *Nav top -->
-          <div class="nav-col-top">
-            <div class="nav-col-top-photo-and-info">
-              <!-- *Nav col top bar markup -->
-              <!-- <img src="assets/user-photo.jpg" alt="" class="profile-image-sm"/>
+  <div class="spinner-wrapper">
+    <div class="spinner"></div>
+  </div>
+  <section id="main-wrapper">
+    <div id="center-box">
+      <div class="nav-col">
+        <!-- *Nav top -->
+        <div class="nav-col-top">
+          <div class="nav-col-top-photo-and-info">
+            <!-- *Nav col top bar markup -->
+            <!-- <img src="assets/user-photo.jpg" alt="" class="profile-image-sm"/>
               <div class="user-info">
                 <div class="user-displayname">
                   Steve Rogers
@@ -41,33 +37,31 @@
                   steverogers1337@gmail.com
                 </div>
               </div> -->
-            </div>
-            <div class="nav-col-top-icons-tray">
-              <i class="material-icons">groups</i>
-              <i class="material-icons sign-out-icon">exit_to_app</i>
-            </div>
           </div>
-          <!-- *Nav search -->
-          <div class="nav-col-search">
-            <i class="material-icons search-icon">search</i>
-            <input
-              type="text"
-              id="search"
-              name="search"
-              class="search-input"
-              placeholder="Search to add friends"
-            />
-            <i class="material-icons clear-search-icon">clear</i>
+          <div class="nav-col-top-icons-tray">
+            <i class="material-icons sign-out-icon">exit_to_app</i>
           </div>
-          <!-- *Nav chat/friend list -->
-          <div class="nav-col-list">
-            <!-- <div class="loader">
+        </div>
+        <!-- *Nav search -->
+        <div class="nav-col-search">
+          <i class="material-icons search-icon">search</i>
+          <input type="text" id="search" name="search" class="search-input" placeholder="Search to add friends" />
+          <i class="material-icons clear-search-icon hide-this">clear</i>
+        </div>
+        <!-- *Nav chat/friend list -->
+        <div class="nav-col-list">
+          <!-- *Loader markup -->
+          <!-- <div class="loader">
               <div class="loader-inner">
                 <div class="loader-spinner"></div>
               </div>
             </div> -->
-            <!-- *List bar markup -->
-            <!-- <div class="list-bar" contactid="321321d3egj34ruogf">
+          <!-- *Search again markup -->
+          <!-- <div class="empty-search-notice">
+            Your search did not match any users
+          </div> -->
+          <!-- *List bar markup -->
+          <!-- <div class="list-bar" contactid="321321d3egj34ruogf">
               <div class="bar-img">
                 <img
                   src="assets/dummies/dummy1.png"
@@ -79,28 +73,46 @@
                 <div class="bar-info-left">
                   <div class="bar-name">Pepe</div>
                   <div class="bar-latest-msg">
-                    <span class="bar-latest-msg-prefix">Pepe: </span>You are
-                    such a pepega
+                   pepelicious@gmail.com
                   </div>
                 </div>
                 <div class="bar-info-right">16:66</div>
               </div>
             </div> -->
+          <!-- *Results bar markup -->
+          <!-- <div class="results-bar" contactid="321321d3egj34ruogf">
+              <div class="bar-img">
+                <img
+                  src="assets/dummies/dummy1.png"
+                  alt=""
+                  class="profile-image"
+                />
+              </div>
+              <div class="bar-info">
+                <div class="bar-info-left">
+                  <div class="bar-name">Pepe</div>
+                  <div class="bar-latest-msg">
+                   pepelicious@gmail.com
+                  </div>
+                </div>
+                <div class="bar-info-right"><button class="add-friend-btn" contactid="xxxx">Add Friend</button></div>
+              </div>
+            </div> -->
+        </div>
+      </div>
+
+      <!-- *Chat col -->
+      <div class="chat-col">
+        <!-- *Chat cover -->
+        <div class="chat-col-cover">
+          <div class="welcome-message">
+            Select a chat on the left to begin messaging!
           </div>
         </div>
-
-        <!-- *Chat col -->
-        <div class="chat-col">
-          <!-- *Chat cover -->
-          <div class="chat-col-cover">
-            <div class="welcome-message">
-              Select a chat on the left to begin messaging!
-            </div>
-          </div>
-          <!-- *Chat top -->
-          <div class="chat-col-top">
-            <!-- *Chat top markup -->
-            <!-- <div class="chat-col-top-photo-and-info">
+        <!-- *Chat top -->
+        <div class="chat-col-top">
+          <!-- *Chat top markup -->
+          <!-- <div class="chat-col-top-photo-and-info">
               <img
                 src="assets/dummies/dummy2.png"
                 alt=""
@@ -110,10 +122,10 @@
                 <div class="chat-name">Jimmy McGill</div>
               </div>
             </div> -->
-          </div>
-          <!-- *Chat messages box -->
-          <div class="chat-col-messages">
-            <!-- <div class="bubble-incoming">
+        </div>
+        <!-- *Chat messages box -->
+        <div class="chat-col-messages">
+          <!-- <div class="bubble-incoming">
               <div class="message-sender">Jimmy</div>
               <div class="message-content">
                 short message?
@@ -128,22 +140,18 @@
               <div class="message-time">14:30</div>
               <div class="tail-out"></div>
             </div> -->
-          </div>
+        </div>
 
-          <!-- *Chat input -->
-          <div class="chat-col-input">
-            <input
-              type="text"
-              id="typed-message"
-              name="typed-message"
-              class="typed-message-input"
-              placeholder="Type a message here..."
-            />
-            <i class="material-icons .md-48 send-icon">send</i>
-          </div>
+        <!-- *Chat input -->
+        <div class="chat-col-input">
+          <input type="text" id="typed-message" name="typed-message" class="typed-message-input"
+            placeholder="Type a message here..." />
+          <i class="material-icons .md-48 send-icon">send</i>
         </div>
       </div>
-    </section>
-    <!-- <button id="main-sign-out">Sign Out</button> -->
-  </body>
+    </div>
+  </section>
+  <!-- <button id="main-sign-out">Sign Out</button> -->
+</body>
+
 </html>

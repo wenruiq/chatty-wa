@@ -13,6 +13,7 @@ import {
 
 // *Models import
 import Search from './models/Search';
+import Add from './models/Add';
 import Contacts from './models/Contacts';
 import Chat from './models/Chat';
 import Socket from './models/Socket';
@@ -50,18 +51,26 @@ const controlLogin = () => {
   }
 };
 
-// todo: Control search & adding contacts
 // *Control search
 const controlSearch = async () => {
   // *Get input from search input
   const query = searchView.getInput();
+  searchView.clearInput();
+  contactsView.clearList();
+  searchView.showSearchExit();
+
+  // *Render loader in nav-col-list
+  renderLoader(elements.navColList, '40px');
 
   if (query) {
     // *Add to state
     state.search = new Search(query.toLowerCase());
-
+    state.isSearch = true;
     try {
       await state.search.getResults();
+      console.log(state.search.data);
+      clearLoader(elements.navColList);
+      searchView.renderSearchResults(state.search.data, state.currentUser.id, state.contacts.data);
     } catch (error) {
       console.log(
         '%c search.getResults() error...',
@@ -77,12 +86,49 @@ elements.searchInput.addEventListener('keypress', e => {
     controlSearch();
   }
 });
+// *Event listener for exiting search
+elements.clearSearchBtn.addEventListener('click', e => {
+  contactsView.clearList();
+  contactsView.renderContacts(state.contacts);
+  searchView.hideSearchExit();
+})
 
-// todo: when adding contact, need to create the subcollections
-// todo: users/contacts/messages
+//* Control Add
+const controladd = async (hisID) => {
+  contactsView.clearList();
+  renderLoader(elements.navColList, '40px');
+  const myID = state.currentUser.id;
+  console.log(hisID);
+  try {
+    const hisData = await state.contacts.getContact(hisID);
+    console.log({ hisData });
+    state.add = new Add(myID, hisID, hisData);
+    try {
+      await state.add.addFriend();
+      clearLoader(elements.navColList);
+    } catch (err) {
+      console.log(err);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+
+}
+// *Event listener for click on add friend
+elements.navColList.addEventListener('click', e => {
+  // *Get contactID of selected user
+  const userClicked = e.target.closest('.add-friend-btn');
+  if (userClicked) {
+    const hisID = userClicked.getAttribute('contactid');
+    controladd(hisID);
+  }
+});
+
 
 // *Control contacts (Get contacts)
 const controlContacts = async () => {
+  contactsView.clearList();
+
   // *Render loader in nav-col-list
   renderLoader(elements.navColList, '40px');
 
@@ -119,7 +165,7 @@ const controlContacts = async () => {
 
 // *Control chat
 const controlChat = async contactID => {
-  
+
   state.chat = new Chat(contactID, state.currentUser.id);
 
   // *Highlight selected chat & de-select previous chat
@@ -130,7 +176,7 @@ const controlChat = async contactID => {
 
   // *Remove startup cover
   chatView.removeCover();
-  
+
   // *Clear Messages
   chatView.clearMessages();
 
@@ -154,9 +200,6 @@ const controlChat = async contactID => {
 };
 // *Event listener for click on contact
 elements.navColList.addEventListener('click', e => {
-  // todo: state should be aware when the list rendered is search results
-  // todo: only perform controlChat if !state.isSearch
-
   // *Get contactID of selected chat room
   const contactClicked = e.target.closest('.list-bar');
   if (contactClicked) {
@@ -182,13 +225,13 @@ const controlMessage = async () => {
   state.message = new Message(hisUserID, senderID, msg);
   // *Render message sent instantly
   chatView.renderMessage(msg, state.currentUser.id);
-  
+
   try {
     await state.message.sendMessageToDB();
   } catch (err) {
     console.log(err);
   }
-  
+
   try {
     await state.message.getSocketID();
     const hisSocketID = state.message.hisSocketID;

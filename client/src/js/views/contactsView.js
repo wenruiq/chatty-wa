@@ -1,15 +1,19 @@
 import { elements, convertFireHHMM } from './base';
 
+export const clearList = () => elements.navColList.innerHTML = '';
+
 export const renderContacts = ({ data, currentUserID }) => {
   data.forEach(contact => {
-    const {
+    var {
       photoURL,
       displayName,
       latestMsg: { msgContent, msgTime, senderID, senderName },
       contactID,
     } = contact;
-
-    const formattedTime = convertFireHHMM(msgTime);
+    const formattedTime = msgContent ? convertFireHHMM(msgTime) : '';
+    if(!msgContent){
+      msgContent = `<div style="color: #1b5c9b">Start a conversation now!</div>`
+    }
     const msgPrefix =
       senderID === currentUserID ? 'You: ' : '';
 
@@ -37,3 +41,5 @@ export const renderContacts = ({ data, currentUserID }) => {
 };
 
 // todo: render latest msg
+
+

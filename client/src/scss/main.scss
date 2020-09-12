@@ -356,6 +356,14 @@ i {
         display: flex;
         flex-direction: column;
         border-top: 1px solid $chat-border-color;
+        
+        .empty-search-notice{
+          padding-top: 20px;
+          width: 100%;
+          text-align: center;
+          color: $chat-dark-color;
+          font-size: 0.9rem;
+        }
 
         .list-bar {
           min-height: 72px;
@@ -421,6 +429,84 @@ i {
             &-right {
               font-size: 12px;
               color: hsla(0, 0, 0, 0.5);
+            }
+          }
+        }
+        
+        .results-bar {
+          min-height: 72px;
+          display: flex;
+          align-items: center;
+          padding: 0 14px;
+          position: relative;
+
+          &-selected {
+            background: $chat-medium-color;
+            cursor: pointer;
+          }
+
+          &::after {
+            content: '';
+            height: 1px;
+            width: calc(100% - 36px);
+            position: absolute;
+            background: $chat-medium-color;
+            bottom: 0;
+            left: 18px;
+          }
+
+          .bar-img {
+            flex: 10%;
+            margin-right: 15px;
+            display: flex;
+
+            img {
+              align-self: center;
+            }
+          }
+
+          .bar-info {
+            flex: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &-left {
+              display: flex;
+              flex-direction: column;
+
+              .bar-name {
+                font-size: 17px;
+                margin-bottom: 3px;
+                font-weight: 500;
+              }
+              .bar-latest-msg {
+                font-size: 14px;
+                color: hsla(0, 0, 0, 0.6);
+
+                &-prefix {
+                  color: $main-color;
+                }
+              }
+            }
+            &-right {
+              .add-friend-btn{
+                padding: 7px 10px;
+                margin-right: 5px;
+                color: hsla(0, 0, 0, 0.6);
+                border: none;
+                border-radius: 5px;
+                
+                &:hover{
+                  cursor: pointer;
+                  background-color: $chat-medium-color;
+                }
+                
+                &:focus{
+                  outline: 0;
+                }
+              }
+              
             }
           }
         }

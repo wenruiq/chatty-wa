@@ -16,4 +16,14 @@ export default class Contacts {
       console.error(error);
     }
   }
+  
+  async getContact(hisID){
+    const userRef = firestore.collection("users").doc(hisID);
+    try {
+      const documentSnapShot = await userRef.get();
+      return documentSnapShot.data();
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }
