@@ -8,9 +8,7 @@ export default class Message {
   }
 
   async sendMessageToDB() {
-    // todo: need to handle when this.hisUserID.isGroup == true
-    // todo: in that case the update to DB will be different
-
+    // todo: need to update latest message for both users
     // *Need to update both mine and his
     const myMessagesRef = firestore.collection(
       `users/${this.myUserID}/contacts/${this.hisUserID}/messages`

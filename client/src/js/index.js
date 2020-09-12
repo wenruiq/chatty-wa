@@ -77,6 +77,7 @@ elements.searchInput.addEventListener('keypress', e => {
     controlSearch();
   }
 });
+
 // todo: when adding contact, need to create the subcollections
 // todo: users/contacts/messages
 
@@ -112,12 +113,13 @@ const controlContacts = async () => {
       console.error(error);
     }
   }
-  //
+  // *Trigger controlSocket here
   controlSocket();
 };
 
 // *Control chat
 const controlChat = async contactID => {
+  
   state.chat = new Chat(contactID, state.currentUser.id);
 
   // *Highlight selected chat & de-select previous chat
@@ -128,14 +130,16 @@ const controlChat = async contactID => {
 
   // *Remove startup cover
   chatView.removeCover();
+  
+  // *Clear Messages
+  chatView.clearMessages();
 
-  // todo: make better looking loader?
+  // *Render Loader
   renderLoader(elements.chatColMessages, '100px');
 
   try {
     // *Get all messages pertaining this contact
     await state.chat.getMessages();
-    console.log({ stateChatData: state.chat.data });
     // *Remove loader
     clearLoader(elements.chatColMessages);
     // *Render messages
@@ -167,7 +171,6 @@ elements.navColList.addEventListener('click', e => {
 
 // *Control message
 const controlMessage = async () => {
-  // todo: get chat selected id from state
   const hisUserID = state.contactSelected;
   const msgContent = chatView.getInput();
   const msgTime = new Date();
@@ -177,13 +180,15 @@ const controlMessage = async () => {
   const msg = { msgContent, msgTime, senderID, senderName, receiverID };
   console.log({ msg });
   state.message = new Message(hisUserID, senderID, msg);
+  // *Render message sent instantly
+  chatView.renderMessage(msg, state.currentUser.id);
+  
   try {
     await state.message.sendMessageToDB();
   } catch (err) {
     console.log(err);
   }
-
-  // todo: Get his socket ID and emit message via socket
+  
   try {
     await state.message.getSocketID();
     const hisSocketID = state.message.hisSocketID;
@@ -195,6 +200,7 @@ const controlMessage = async () => {
 elements.typedMsgInput.addEventListener('keypress', e => {
   if (e.key === 'Enter') {
     controlMessage();
+    chatView.clearInput();
   }
 });
 
@@ -218,7 +224,8 @@ const controlSocket = async () => {
     socket.on('message receiver', msg => {
       console.log('%c Message received at socket:', 'color: green');
       console.log(msg);
-      chatView.renderMessage(msg, state.currentUser.id);``
+      // todo: need to check contactSelected to decide render flow
+      chatView.renderMessage(msg, state.currentUser.id);
 
     })
   }
@@ -246,7 +253,6 @@ auth.onAuthStateChanged(async userAuth => {
         id: snapShot.id,
         ...snapShot.data(),
       };
-      console.log('%c userRef.onSnapshot fired.', 'color:cyan');
       // *Clear main spinner after getting current user data
       clearSpinner();
       controlLogin();

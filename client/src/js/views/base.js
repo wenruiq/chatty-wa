@@ -52,8 +52,21 @@ export const clearSpinner = () => {
 };
 
 // *Converters
-export const convertHHMM = firetime => {
+export const convertFireHHMM = firetime => {
   const hours = firetime.toDate().getHours();
-  const minutes = firetime.toDate().getMinutes().toString().length == 2 ? firetime.toDate().getMinutes() : `0${firetime.toDate().getMinutes()}`;
-  return `${hours}:${minutes}`;
+  const minutes = firetime.toDate().getMinutes();
+  const minutesAdjusted = minutes.toString().length == 2 ? minutes : `0${minutes}`;
+  return `${hours}:${minutesAdjusted}`;
 };
+export const convertStringHHMM = timeString => {
+  const hours = new Date(timeString).getHours();
+  const minutes = new Date(timeString).getMinutes();
+  const minutesAdjusted = minutes.toString().length == 2 ? minutes : `0${minutes}`;
+  return `${hours}:${minutesAdjusted}`;
+};
+export const convertStandardHHMM = time => { 
+  const hours = time.getHours();
+  const minutes = time.getMinutes();
+  const minutesAdjusted = minutes.toString().length == 2 ? minutes : `0${minutes}`;
+  return `${hours}:${minutesAdjusted}`;
+}

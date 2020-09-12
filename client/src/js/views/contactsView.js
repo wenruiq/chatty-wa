@@ -1,4 +1,4 @@
-import { elements, convertHHMM } from './base';
+import { elements, convertFireHHMM } from './base';
 
 export const renderContacts = ({ data, currentUserID }) => {
   data.forEach(contact => {
@@ -6,13 +6,12 @@ export const renderContacts = ({ data, currentUserID }) => {
       photoURL,
       displayName,
       latestMsg: { msgContent, msgTime, senderID, senderName },
-      isGroup,
       contactID,
     } = contact;
 
-    const formattedTime = convertHHMM(msgTime);
+    const formattedTime = convertFireHHMM(msgTime);
     const msgPrefix =
-      senderID === currentUserID ? 'You: ' : isGroup ? `${senderName}: ` : '';
+      senderID === currentUserID ? 'You: ' : '';
 
     const markup = `
     <div class="list-bar" contactid=${contactID}>
@@ -36,3 +35,5 @@ export const renderContacts = ({ data, currentUserID }) => {
     elements.navColList.insertAdjacentHTML('beforeend', markup);
   });
 };
+
+// todo: render latest msg

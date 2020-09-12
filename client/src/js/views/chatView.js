@@ -1,7 +1,12 @@
-import { elements, convertHHMM } from './base';
+import { elements, convertStringHHMM, convertFireHHMM, convertStandardHHMM } from './base';
 
 export const getInput = () => elements.typedMsgInput.value;
 
+export const clearInput = () => elements.typedMsgInput.value = '';
+
+export const clearMessages = () => elements.chatColMessages.innerHTML = '';
+
+//* Removes default page (it is a cover on top)
 export const removeCover = () => {
   const cover = elements.chatColCover;
   if (cover.parentElement) {
@@ -25,8 +30,7 @@ export const renderTopBar = (contactID, allContacts) => {
     contact => contact.contactID == contactID
   );
   if (contactData) {
-    const { photoURL, displayName, groupMembers, isGroup, email } = contactData;
-    const chatInfo = isGroup ? groupMembers.join(', ') : email;
+    const { photoURL, displayName, email } = contactData;
     const markup = `
     <div class="chat-col-top-photo-and-info">
       <img
@@ -36,7 +40,7 @@ export const renderTopBar = (contactID, allContacts) => {
       />
       <div class="chat-info">
         <div class="chat-name">${displayName}</div>
-        <div class="chat-data">${chatInfo}</div>
+        <div class="chat-data">${email}</div>
       </div>
     </div>
     `;
@@ -55,7 +59,16 @@ export const renderMessages = ({ currentUserID, data }) => {
 // *Render one message (Used both as a helper method for the function above and to render latest msg at socket)
 export const renderMessage = (msg, currentUserID) => {
   const { senderID, senderName, msgTime, msgContent, receiverID } = msg;
-  const formattedTime = convertHHMM(msgTime);
+
+  // *Check if msg is from socket or from database
+  if (typeof (msgTime) == "string") {
+    var formattedTime = convertStringHHMM(msgTime);
+  } else if (msgTime.seconds) {
+    var formattedTime = convertFireHHMM(msgTime);
+  } else {
+    var formattedTime = convertStandardHHMM(msgTime);
+  }
+
   if (senderID === currentUserID) {
     var markup = `
     <div class="bubble-outgoing">
@@ -81,3 +94,4 @@ export const renderMessage = (msg, currentUserID) => {
   elements.chatColMessages.insertAdjacentHTML('beforeend', markup);
   elements.chatColMessages.scrollTop = elements.chatColMessages.scrollHeight;
 }
+
