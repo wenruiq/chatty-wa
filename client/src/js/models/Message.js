@@ -16,6 +16,8 @@ export default class Message {
     const hisMessagesRef = firestore.collection(
       `users/${this.hisUserID}/contacts/${this.myUserID}/messages`
     );
+    const myLatestMsgRef = firestore.doc(`users/${this.myUserID}/contacts/${this.hisUserID}`);
+    const hisLatestMsgRef = firestore.doc(`users/${this.hisUserID}/contacts/${this.myUserID}`);
 
     try {
       const collectionSnapShot1 = await myMessagesRef.add({
@@ -23,6 +25,16 @@ export default class Message {
       });
       const collectionSnapShot2 = await hisMessagesRef.add({
         ...this.msg,
+      });
+      await myLatestMsgRef.update({
+        latestMsg:{
+          ...this.msg
+        }
+      });
+      await hisLatestMsgRef.update({
+        latestMsg:{
+          ...this.msg
+        }
       });
     } catch (error) {
       console.error(error);

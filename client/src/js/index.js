@@ -94,15 +94,15 @@ elements.clearSearchBtn.addEventListener('click', e => {
 })
 
 //* Control Add
-const controladd = async (hisID) => {
+const controlAdd = async (hisID) => {
   contactsView.clearList();
   renderLoader(elements.navColList, '40px');
   const myID = state.currentUser.id;
   console.log(hisID);
   try {
     const hisData = await state.contacts.getContact(hisID);
-    console.log({ hisData });
-    state.add = new Add(myID, hisID, hisData);
+    const myData = await state.contacts.getContact(myID);
+    state.add = new Add(myID, hisID, hisData, myData);
     try {
       await state.add.addFriend();
       clearLoader(elements.navColList);
@@ -120,7 +120,7 @@ elements.navColList.addEventListener('click', e => {
   const userClicked = e.target.closest('.add-friend-btn');
   if (userClicked) {
     const hisID = userClicked.getAttribute('contactid');
-    controladd(hisID);
+    controlAdd(hisID);
   }
 });
 
@@ -267,8 +267,8 @@ const controlSocket = async () => {
     socket.on('message receiver', msg => {
       console.log('%c Message received at socket:', 'color: green');
       console.log(msg);
-      // todo: need to check contactSelected to decide render flow
       chatView.renderMessage(msg, state.currentUser.id);
+      
 
     })
   }
@@ -282,7 +282,7 @@ auth.onAuthStateChanged(async userAuth => {
     console.log({ userAuth });
     // *Check if this was a sign up
     const displayName = localStorage.getItem('displayName');
-    if (displayName) {
+    if (displayName != "null") {
       // *Sign up process
       const userRef = await createUserDocument(userAuth, { displayName });
       localStorage.setItem('displayName', null);

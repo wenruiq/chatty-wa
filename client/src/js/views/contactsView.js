@@ -40,6 +40,11 @@ export const renderContacts = ({ data, currentUserID }) => {
   });
 };
 
+
 // todo: render latest msg
+// export const renderLatestMsg = () => {
+  
+  
+// }
 
 
