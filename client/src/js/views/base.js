@@ -19,7 +19,7 @@ export const elements = {
   chatColTop: document.querySelector('.chat-col-top'),
   chatColMessages: document.querySelector('.chat-col-messages'),
   typedMsgInput: document.querySelector('.typed-message-input'),
-  clearSearchBtn: document.querySelector('.clear-search-icon')
+  clearSearchBtn: document.querySelector('.clear-search-icon'),
 };
 
 // *Reusable loaders and spinners

@@ -405,8 +405,22 @@ i {
                 #main-wrapper #center-box .nav-col-list .list-bar .bar-info-left .bar-latest-msg-prefix {
                   color: #1b5c9b; }
             #main-wrapper #center-box .nav-col-list .list-bar .bar-info-right {
-              font-size: 12px;
-              color: rgba(0, 0, 0, 0.5); }
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
+              justify-content: space-between;
+              min-height: 39px; }
+              #main-wrapper #center-box .nav-col-list .list-bar .bar-info-right .latest-msg-time {
+                font-size: 12px;
+                color: rgba(0, 0, 0, 0.5); }
+              #main-wrapper #center-box .nav-col-list .list-bar .bar-info-right .unread-msg-badge {
+                height: 10px;
+                width: 10px;
+                background-color: #357ae8;
+                border-radius: 50%;
+                visibility: hidden; }
+              #main-wrapper #center-box .nav-col-list .list-bar .bar-info-right .show-badge {
+                visibility: initial; }
         #main-wrapper #center-box .nav-col-list .results-bar {
           min-height: 72px;
           display: flex;

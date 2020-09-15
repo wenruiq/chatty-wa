@@ -98,7 +98,6 @@ const controlAdd = async (hisID) => {
   contactsView.clearList();
   renderLoader(elements.navColList, '40px');
   const myID = state.currentUser.id;
-  console.log(hisID);
   try {
     const hisData = await state.contacts.getContact(hisID);
     const myData = await state.contacts.getContact(myID);
@@ -106,6 +105,7 @@ const controlAdd = async (hisID) => {
     try {
       await state.add.addFriend();
       clearLoader(elements.navColList);
+      controlContacts();
     } catch (err) {
       console.log(err);
     }
@@ -208,6 +208,11 @@ elements.navColList.addEventListener('click', e => {
     if (state.contactSelected !== contactID) {
       state.contactSelected = contactID;
       controlChat(contactID);
+
+      // *Remove unread message badge
+      if (document.querySelector(`#unread-msg-badge-${contactID}`).classList.contains("show-badge")) {
+        document.querySelector(`#unread-msg-badge-${contactID}`).classList.remove("show-badge");
+      }
     }
   }
 });
@@ -221,10 +226,10 @@ const controlMessage = async () => {
   const senderName = state.currentUser.displayName;
   const receiverID = hisUserID;
   const msg = { msgContent, msgTime, senderID, senderName, receiverID };
-  console.log({ msg });
   state.message = new Message(hisUserID, senderID, msg);
   // *Render message sent instantly
   chatView.renderMessage(msg, state.currentUser.id);
+  contactsView.renderLatestMsg(msg, state.currentUser.id, state.contactSelected);
 
   try {
     await state.message.sendMessageToDB();
@@ -242,10 +247,14 @@ const controlMessage = async () => {
 };
 elements.typedMsgInput.addEventListener('keypress', e => {
   if (e.key === 'Enter') {
-    controlMessage();
-    chatView.clearInput();
+    if (chatView.getInput()) {
+      controlMessage();
+      chatView.clearInput();
+    }
   }
 });
+
+//todo: click should be able to send too
 
 // *Control socket
 const controlSocket = async () => {
@@ -263,13 +272,14 @@ const controlSocket = async () => {
       console.error(error);
     }
 
-    // todo: Message receiver, appends message to UI accordingly
+    // *Message receiver appends msg to UI accordingly
     socket.on('message receiver', msg => {
       console.log('%c Message received at socket:', 'color: green');
       console.log(msg);
       chatView.renderMessage(msg, state.currentUser.id);
-      
-
+      const contactSelectedID = state.contactSelected;
+      contactsView.renderLatestMsg(msg, myUserID, contactSelectedID);
+      // todo: check if this message is a from a new friend, if yes need render this contact.
     })
   }
 };
