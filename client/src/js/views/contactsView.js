@@ -1,9 +1,16 @@
 import { elements, convertFireHHMM } from './base';
 
-export const clearList = () => elements.navColList.innerHTML = '';
-
+export const clearList = () => (elements.navColList.innerHTML = '');
 
 export const renderContacts = ({ data, currentUserID }) => {
+  if (!data.length) {
+    const markup = `
+    <div class="empty-contacts-notice">
+      Use the search bar above to add your friends!
+    </div>
+    `;
+    elements.navColList.insertAdjacentHTML('beforeend', markup);
+  }
   data.forEach(contact => {
     var {
       photoURL,
@@ -13,11 +20,9 @@ export const renderContacts = ({ data, currentUserID }) => {
     } = contact;
     const formattedTime = msgContent ? convertFireHHMM(msgTime) : '';
     if (!msgContent) {
-      msgContent = `<div style="color: #1b5c9b">Start a conversation now!</div>`
+      msgContent = `<div style="color: #1b5c9b">Start a conversation now!</div>`;
     }
-    const msgPrefix =
-      senderID === currentUserID ? 'You: ' : '';
-    console.log({ contactID });
+    const msgPrefix = senderID === currentUserID ? 'You: ' : '';
     const markup = `
     <div class="list-bar" contactid=${contactID}>
       <div class="bar-img">
@@ -47,7 +52,6 @@ export const renderContacts = ({ data, currentUserID }) => {
   });
 };
 
-
 // todo: render latest msg
 export const renderLatestMsg = (msg, currentUserID, contactSelectedID) => {
   const { msgContent, msgTime, receiverID, senderID, senderName } = msg;
@@ -55,10 +59,11 @@ export const renderLatestMsg = (msg, currentUserID, contactSelectedID) => {
   // *Received a msg
   if (senderID != currentUserID) {
     document.getElementById(`latest-msg-${senderID}`).innerHTML = msgContent;
-    console.log({contactSelectedID});
+    console.log({ contactSelectedID });
     if (senderID != contactSelectedID) {
-      document.getElementById(`unread-msg-badge-${senderID}`).classList.add("show-badge");
-
+      document
+        .getElementById(`unread-msg-badge-${senderID}`)
+        .classList.add('show-badge');
     }
   } else {
     // *Sent a message
@@ -67,9 +72,8 @@ export const renderLatestMsg = (msg, currentUserID, contactSelectedID) => {
       ${msgContent}
     `;
     document.getElementById(`latest-msg-${receiverID}`).innerHTML = '';
-    document.getElementById(`latest-msg-${receiverID}`).insertAdjacentHTML(`beforeend`, markup);
+    document
+      .getElementById(`latest-msg-${receiverID}`)
+      .insertAdjacentHTML(`beforeend`, markup);
   }
-
-}
-
-
+};

@@ -20,6 +20,7 @@ export const elements = {
   chatColMessages: document.querySelector('.chat-col-messages'),
   typedMsgInput: document.querySelector('.typed-message-input'),
   clearSearchBtn: document.querySelector('.clear-search-icon'),
+  sendMessageBtn: document.querySelector('#send-message-btn'),
 };
 
 // *Reusable loaders and spinners
@@ -56,18 +57,24 @@ export const clearSpinner = () => {
 export const convertFireHHMM = firetime => {
   const hours = firetime.toDate().getHours();
   const minutes = firetime.toDate().getMinutes();
-  const minutesAdjusted = minutes.toString().length == 2 ? minutes : `0${minutes}`;
-  return `${hours}:${minutesAdjusted}`;
+  const hoursAdjusted = hours.toString().length == 2 ? hours : `0${hours}`;
+  const minutesAdjusted =
+    minutes.toString().length == 2 ? minutes : `0${minutes}`;
+  return `${hoursAdjusted}:${minutesAdjusted}`;
 };
 export const convertStringHHMM = timeString => {
   const hours = new Date(timeString).getHours();
   const minutes = new Date(timeString).getMinutes();
-  const minutesAdjusted = minutes.toString().length == 2 ? minutes : `0${minutes}`;
-  return `${hours}:${minutesAdjusted}`;
+  const hoursAdjusted = hours.toString().length == 2 ? hours : `0${hours}`;
+  const minutesAdjusted =
+    minutes.toString().length == 2 ? minutes : `0${minutes}`;
+  return `${hoursAdjusted}:${minutesAdjusted}`;
 };
-export const convertStandardHHMM = time => { 
+export const convertStandardHHMM = time => {
   const hours = time.getHours();
   const minutes = time.getMinutes();
-  const minutesAdjusted = minutes.toString().length == 2 ? minutes : `0${minutes}`;
-  return `${hours}:${minutesAdjusted}`;
-}
+  const hoursAdjusted = hours.toString().length == 2 ? hours : `0${hours}`;
+  const minutesAdjusted =
+    minutes.toString().length == 2 ? minutes : `0${minutes}`;
+  return `${hoursAdjusted}:${minutesAdjusted}`;
+};

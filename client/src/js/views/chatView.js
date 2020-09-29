@@ -1,10 +1,15 @@
-import { elements, convertStringHHMM, convertFireHHMM, convertStandardHHMM } from './base';
+import {
+  elements,
+  convertStringHHMM,
+  convertFireHHMM,
+  convertStandardHHMM,
+} from './base';
 
 export const getInput = () => elements.typedMsgInput.value;
 
-export const clearInput = () => elements.typedMsgInput.value = '';
+export const clearInput = () => (elements.typedMsgInput.value = '');
 
-export const clearMessages = () => elements.chatColMessages.innerHTML = '';
+export const clearMessages = () => (elements.chatColMessages.innerHTML = '');
 
 //* Removes default page (it is a cover on top)
 export const removeCover = () => {
@@ -12,6 +17,24 @@ export const removeCover = () => {
   if (cover.parentElement) {
     cover.parentElement.removeChild(cover);
   }
+};
+
+//* Remove cover after remove friend
+export const removeCoverAfterRemoveFriend = () => {
+  const cover = elements.chatColCover;
+  elements.chatCol.removeChild(elements.chatCol.childNodes[1]);
+}
+
+//* Add cover
+export const addCover = () => {
+  const markup = `
+  <div class="chat-col-cover">
+    <div class="welcome-message">
+      Select a chat on the left to begin messaging!
+    </div>
+  </div>
+  `;
+  elements.chatCol.insertAdjacentHTML('afterbegin', markup);
 };
 
 export const highlightSelectedContact = contactSelected => {
@@ -43,6 +66,7 @@ export const renderTopBar = (contactID, allContacts) => {
         <div class="chat-data">${email}</div>
       </div>
     </div>
+    <i class="material-icons sign-out-icon" id="remove-friend-btn" contactid="${contactID}">person_remove</i>
     `;
     elements.chatColTop.innerHTML = '';
     elements.chatColTop.insertAdjacentHTML('afterbegin', markup);
@@ -56,12 +80,12 @@ export const renderMessages = ({ currentUserID, data }) => {
   });
 };
 
-// *Render one message (Used both as a helper method for the function above and to render latest msg at socket)
+// *Render one message (Used both as a helper method for the function above and to render latest msg at socket
 export const renderMessage = (msg, currentUserID) => {
   const { senderID, senderName, msgTime, msgContent, receiverID } = msg;
 
   // *Check if msg is from socket or from database
-  if (typeof (msgTime) == "string") {
+  if (typeof msgTime == 'string') {
     var formattedTime = convertStringHHMM(msgTime);
   } else if (msgTime.seconds) {
     var formattedTime = convertFireHHMM(msgTime);
@@ -93,5 +117,4 @@ export const renderMessage = (msg, currentUserID) => {
   }
   elements.chatColMessages.insertAdjacentHTML('beforeend', markup);
   elements.chatColMessages.scrollTop = elements.chatColMessages.scrollHeight;
-}
-
+};

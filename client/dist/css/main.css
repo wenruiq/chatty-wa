@@ -149,7 +149,7 @@ i {
     padding: 3rem 4.5rem 3.5rem 4.5rem; }
     #login-box .sign-in-top {
       display: grid;
-      grid-template-areas: 'logo title' 'logo msg';
+      grid-template-areas: 'logo title' 'logo msg';
       margin-bottom: 22px; }
       #login-box .sign-in-top .sign-in-logo {
         grid-area: logo;
@@ -213,7 +213,7 @@ i {
     padding: 3rem 4.5rem 3.5rem 4.5rem; }
     #login-box .sign-up-top {
       display: grid;
-      grid-template-areas: 'title' 'msg';
+      grid-template-areas: 'title' 'msg';
       height: 83px;
       margin-bottom: 10px; }
       #login-box .sign-up-top .sign-up-title {
@@ -361,6 +361,12 @@ i {
           text-align: center;
           color: #4a4a4a;
           font-size: 0.9rem; }
+        #main-wrapper #center-box .nav-col-list .empty-contacts-notice {
+          padding-top: 20px;
+          width: 100%;
+          text-align: center;
+          color: #4a4a4a;
+          font-size: 0.9rem; }
         #main-wrapper #center-box .nav-col-list .list-bar {
           min-height: 72px;
           display: flex;
@@ -484,7 +490,8 @@ i {
         background: #e6e6e6;
         color: #000;
         display: flex;
-        align-items: center; }
+        align-items: center;
+        justify-content: space-between; }
         #main-wrapper #center-box .chat-col-top-photo-and-info {
           display: flex;
           align-items: center;
@@ -499,6 +506,8 @@ i {
             #main-wrapper #center-box .chat-col-top-photo-and-info .chat-info .chat-data {
               font-size: 13px;
               color: rgba(0, 0, 0, 0.6); }
+        #main-wrapper #center-box .chat-col-top #remove-friend-btn {
+          margin-right: 25px; }
       #main-wrapper #center-box .chat-col-messages {
         flex: 1 1 0;
         width: 100%;

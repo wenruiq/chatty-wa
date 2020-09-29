@@ -356,8 +356,16 @@ i {
         display: flex;
         flex-direction: column;
         border-top: 1px solid $chat-border-color;
+
+        .empty-search-notice {
+          padding-top: 20px;
+          width: 100%;
+          text-align: center;
+          color: $chat-dark-color;
+          font-size: 0.9rem;
+        }
         
-        .empty-search-notice{
+        .empty-contacts-notice {
           padding-top: 20px;
           width: 100%;
           text-align: center;
@@ -432,27 +440,27 @@ i {
               align-items: flex-end;
               justify-content: space-between;
               min-height: 39px;
-              
-              .latest-msg-time{
+
+              .latest-msg-time {
                 font-size: 12px;
                 color: hsla(0, 0, 0, 0.5);
               }
 
-              .unread-msg-badge{
+              .unread-msg-badge {
                 height: 10px;
                 width: 10px;
                 background-color: #357ae8;
                 border-radius: 50%;
                 visibility: hidden;
               }
-              
-              .show-badge{
+
+              .show-badge {
                 visibility: initial;
               }
             }
           }
         }
-        
+
         .results-bar {
           min-height: 72px;
           display: flex;
@@ -510,23 +518,22 @@ i {
               }
             }
             &-right {
-              .add-friend-btn{
+              .add-friend-btn {
                 padding: 7px 10px;
                 margin-right: 5px;
                 color: hsla(0, 0, 0, 0.6);
                 border: none;
                 border-radius: 5px;
-                
-                &:hover{
+
+                &:hover {
                   cursor: pointer;
                   background-color: $chat-medium-color;
                 }
-                
-                &:focus{
+
+                &:focus {
                   outline: 0;
                 }
               }
-              
             }
           }
         }
@@ -549,6 +556,7 @@ i {
         color: #000;
         display: flex;
         align-items: center;
+        justify-content: space-between;
 
         &-photo-and-info {
           display: flex;
@@ -570,6 +578,10 @@ i {
               color: hsla(0, 0, 0, 0.6);
             }
           }
+        }
+
+        #remove-friend-btn {
+          margin-right: 25px;
         }
       }
 

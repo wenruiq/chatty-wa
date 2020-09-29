@@ -10,7 +10,6 @@ export const hideSearchExit = () => elements.clearSearchBtn.classList.add("hide-
 
 // *Render Search Results
 export const renderSearchResults = (data, currentUserID, contacts) => {
-  // todo: if the only searchr result is someone that's your friend, it shouldnt render nth
   if (data.length == 0 ) {
     const markup = `
     <div class="empty-search-notice">

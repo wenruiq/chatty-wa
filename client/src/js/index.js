@@ -14,6 +14,7 @@ import {
 // *Models import
 import Search from './models/Search';
 import Add from './models/Add';
+import Remove from './models/Remove';
 import Contacts from './models/Contacts';
 import Chat from './models/Chat';
 import Socket from './models/Socket';
@@ -59,10 +60,9 @@ const controlSearch = async () => {
   contactsView.clearList();
   searchView.showSearchExit();
 
-  // *Render loader in nav-col-list
-  renderLoader(elements.navColList, '40px');
-
   if (query) {
+    // *Render loader in nav-col-list
+    renderLoader(elements.navColList, '40px');
     // *Add to state
     state.search = new Search(query.toLowerCase());
     state.isSearch = true;
@@ -70,7 +70,11 @@ const controlSearch = async () => {
       await state.search.getResults();
       console.log(state.search.data);
       clearLoader(elements.navColList);
-      searchView.renderSearchResults(state.search.data, state.currentUser.id, state.contacts.data);
+      searchView.renderSearchResults(
+        state.search.data,
+        state.currentUser.id,
+        state.contacts.data
+      );
     } catch (error) {
       console.log(
         '%c search.getResults() error...',
@@ -91,10 +95,10 @@ elements.clearSearchBtn.addEventListener('click', e => {
   contactsView.clearList();
   contactsView.renderContacts(state.contacts);
   searchView.hideSearchExit();
-})
+});
 
 //* Control Add
-const controlAdd = async (hisID) => {
+const controlAdd = async hisID => {
   contactsView.clearList();
   renderLoader(elements.navColList, '40px');
   const myID = state.currentUser.id;
@@ -105,6 +109,7 @@ const controlAdd = async (hisID) => {
     try {
       await state.add.addFriend();
       clearLoader(elements.navColList);
+      searchView.hideSearchExit();
       controlContacts();
     } catch (err) {
       console.log(err);
@@ -112,9 +117,8 @@ const controlAdd = async (hisID) => {
   } catch (err) {
     console.log(err);
   }
-
-}
-// *Event listener for click on add friend
+};
+// *Event listener for click to add friend
 elements.navColList.addEventListener('click', e => {
   // *Get contactID of selected user
   const userClicked = e.target.closest('.add-friend-btn');
@@ -123,7 +127,6 @@ elements.navColList.addEventListener('click', e => {
     controlAdd(hisID);
   }
 });
-
 
 // *Control contacts (Get contacts)
 const controlContacts = async () => {
@@ -165,7 +168,6 @@ const controlContacts = async () => {
 
 // *Control chat
 const controlChat = async contactID => {
-
   state.chat = new Chat(contactID, state.currentUser.id);
 
   // *Highlight selected chat & de-select previous chat
@@ -208,12 +210,47 @@ elements.navColList.addEventListener('click', e => {
     if (state.contactSelected !== contactID) {
       state.contactSelected = contactID;
       controlChat(contactID);
-
+      chatView.removeCoverAfterRemoveFriend();
       // *Remove unread message badge
-      if (document.querySelector(`#unread-msg-badge-${contactID}`).classList.contains("show-badge")) {
-        document.querySelector(`#unread-msg-badge-${contactID}`).classList.remove("show-badge");
+      if (
+        document
+          .querySelector(`#unread-msg-badge-${contactID}`)
+          .classList.contains('show-badge')
+      ) {
+        document
+          .querySelector(`#unread-msg-badge-${contactID}`)
+          .classList.remove('show-badge');
       }
     }
+  }
+});
+
+//* Control Remove
+const controlRemove = async hisID => {
+  const myID = state.currentUser.id;
+  try {
+    state.remove = new Remove(myID, hisID);
+    try {
+      await state.remove.removeFriend();
+      controlContacts();
+      chatView.addCover();
+    } catch (err) {
+      console.log(err);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+// *Event listener for click to remove friend
+elements.chatColTop.addEventListener('click', e => {
+  // *Get contactID of selected user
+  const userClicked = e.target.closest('#remove-friend-btn');
+  if (
+    userClicked &&
+    confirm('Are you sure you want to remove this friend from your contacts?')
+  ) {
+    const hisID = userClicked.getAttribute('contactid');
+    controlRemove(hisID);
   }
 });
 
@@ -229,7 +266,11 @@ const controlMessage = async () => {
   state.message = new Message(hisUserID, senderID, msg);
   // *Render message sent instantly
   chatView.renderMessage(msg, state.currentUser.id);
-  contactsView.renderLatestMsg(msg, state.currentUser.id, state.contactSelected);
+  contactsView.renderLatestMsg(
+    msg,
+    state.currentUser.id,
+    state.contactSelected
+  );
 
   try {
     await state.message.sendMessageToDB();
@@ -254,7 +295,12 @@ elements.typedMsgInput.addEventListener('keypress', e => {
   }
 });
 
-//todo: click should be able to send too
+elements.sendMessageBtn.addEventListener('click', e => {
+  if (chatView.getInput()) {
+    controlMessage();
+    chatView.clearInput();
+  }
+});
 
 // *Control socket
 const controlSocket = async () => {
@@ -276,11 +322,16 @@ const controlSocket = async () => {
     socket.on('message receiver', msg => {
       console.log('%c Message received at socket:', 'color: green');
       console.log(msg);
-      chatView.renderMessage(msg, state.currentUser.id);
       const contactSelectedID = state.contactSelected;
-      contactsView.renderLatestMsg(msg, myUserID, contactSelectedID);
+      if (msg.senderID == contactSelectedID) {
+        chatView.renderMessage(msg, state.currentUser.id);
+        contactsView.renderLatestMsg(msg, myUserID, contactSelectedID);
+      } else {
+        contactsView.renderLatestMsg(msg, myUserID, contactSelectedID);
+      }
+
       // todo: check if this message is a from a new friend, if yes need render this contact.
-    })
+    });
   }
 };
 
@@ -292,7 +343,7 @@ auth.onAuthStateChanged(async userAuth => {
     console.log({ userAuth });
     // *Check if this was a sign up
     const displayName = localStorage.getItem('displayName');
-    if (displayName != "null") {
+    if (displayName != 'null') {
       // *Sign up process
       const userRef = await createUserDocument(userAuth, { displayName });
       localStorage.setItem('displayName', null);
