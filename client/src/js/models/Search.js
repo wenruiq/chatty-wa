@@ -10,9 +10,9 @@ export default class Search {
     const query = searchRef.where('searchTerms', 'array-contains', this.query);
     try {
       const snapShot = await query.get();
-      snapShot.forEach(doc => {
-        console.log(doc.id, ' => ', doc.data());
-      });
+      // snapShot.forEach(doc => {
+      //   console.log(doc.id, ' => ', doc.data());
+      // });
       this.data = snapShot.docs.map(doc => {
         return { userID: doc.id, ...doc.data() }
       });

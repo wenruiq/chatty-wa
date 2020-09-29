@@ -34,7 +34,6 @@ const controlSignIn = async () => {
   const email = signInView.getEmail();
   const password = signInView.getPassword();
   if (signInView.formValidation({ email, password })) {
-    console.log('processing sign in...');
     state.signIn = new SignIn(email, password);
     try {
       state.signIn.processSignIn();

@@ -29,16 +29,16 @@ import Message from './models/Message';
 // *Initiate state
 const state = { contactSelected: null, latestMsgTime: null };
 // !Console log TBR (To Be Removed)
-console.log('%cCurrent state:', 'color:purple; font-weight: bold');
-console.log({ state });
+// console.log('%cCurrent state:', 'color:purple; font-weight: bold');
+// console.log({ state });
 
 // *Connect to socket endpoint
 const ENDPOINT = 'https://chatty-wa.herokuapp.com/';
 var socket = io(ENDPOINT);
 
 // !Console log TBR (To Be Removed)
-console.log('%cCurrent socket:', 'color:maroon; font-weight: bold');
-console.log({ socket });
+// console.log('%cCurrent socket:', 'color:maroon; font-weight: bold');
+// console.log({ socket });
 
 // *Control login (render nav-col-top, load contacts, connect to socket endpoint)
 const controlLogin = () => {
@@ -68,7 +68,6 @@ const controlSearch = async () => {
     state.isSearch = true;
     try {
       await state.search.getResults();
-      console.log(state.search.data);
       clearLoader(elements.navColList);
       searchView.renderSearchResults(
         state.search.data,
@@ -146,8 +145,8 @@ const controlContacts = async () => {
       await state.contacts.getContacts();
 
       // !Console log TBR
-      console.log('%cAll my contacts:', 'color: blue; font-weight: bold;');
-      console.log(state.contacts.data);
+      // console.log('%cAll my contacts:', 'color: blue; font-weight: bold;');
+      // console.log(state.contacts.data);
 
       // *Clear loader from nav-col-list
       clearLoader(elements.navColList);
@@ -305,7 +304,6 @@ elements.sendMessageBtn.addEventListener('click', e => {
 
 // *Control socket
 const controlSocket = async () => {
-  console.log('controlling socket');
   // *Update firestore with my latest socketID (socket ID changes with page reload)
   if (state.currentUser) {
     const myUserID = state.currentUser.id;
@@ -322,12 +320,12 @@ const controlSocket = async () => {
 
     // *Message receiver appends msg to UI accordingly
     socket.on('message receiver', msg => {
-      console.log('%c Message received at socket:', 'color: green');
-      console.log(msg);
+      // !Console log TBR
+      // console.log('%c Message received at socket:', 'color: green');
+      // console.log(msg);
       const contactSelectedID = state.contactSelected;
       const msgSenderID = msg.senderID;
       const contactIDList = state.contacts.dataIDList;
-      console.log(msg.msgTime);
       if (!contactIDList.includes(msgSenderID)) {
         // *This guy added me but my contacts not refreshed yet
         controlContacts();
@@ -351,8 +349,8 @@ const controlSocket = async () => {
 auth.onAuthStateChanged(async userAuth => {
   if (userAuth) {
     // !Console log TBR
-    console.log('%cUserAuth object:', 'color: DarkCyan; font-weight:bold');
-    console.log({ userAuth });
+    // console.log('%cUserAuth object:', 'color: DarkCyan; font-weight:bold');
+    // console.log({ userAuth });
     // *Check if this was a sign up
     const displayName = localStorage.getItem('displayName');
     const isSignUp = localStorage.getItem('is-sign-up');
@@ -360,6 +358,7 @@ auth.onAuthStateChanged(async userAuth => {
       // *Sign up process
       const userRef = await createUserDocument(userAuth, { displayName });
       localStorage.setItem('displayName', null);
+      localStorage.setItem('is-sign-up', null);
     }
 
     // *Create user document in firestore if user doesn't exist yet
