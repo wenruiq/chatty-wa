@@ -16,6 +16,7 @@ export default class SignUp {
       );
       // Passing data required to index.html for creation of user document upon sign up
       localStorage.setItem('displayName', this.displayName);
+      localStorage.setItem('is-sign-up', "1337");
     } catch (err) {
       console.error(err);
     }

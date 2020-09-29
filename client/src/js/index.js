@@ -308,6 +308,7 @@ const controlSocket = async () => {
   // *Update firestore with my latest socketID (socket ID changes with page reload)
   if (state.currentUser) {
     const myUserID = state.currentUser.id;
+    await socket.id;
     state.socket = new Socket(myUserID, socket.id);
     try {
       await state.socket.updateSocketID();
@@ -349,7 +350,8 @@ auth.onAuthStateChanged(async userAuth => {
     console.log({ userAuth });
     // *Check if this was a sign up
     const displayName = localStorage.getItem('displayName');
-    if (displayName != 'null') {
+    const isSignUp = localStorage.getItem('is-sign-up');
+    if (isSignUp == "1337") {
       // *Sign up process
       const userRef = await createUserDocument(userAuth, { displayName });
       localStorage.setItem('displayName', null);
