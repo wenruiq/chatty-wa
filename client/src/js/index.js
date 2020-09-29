@@ -32,7 +32,7 @@ console.log('%cCurrent state:', 'color:purple; font-weight: bold');
 console.log({ state });
 
 // *Connect to socket endpoint
-const ENDPOINT = 'localhost:5000';
+const ENDPOINT = 'https://chatty-wa.herokuapp.com/';
 var socket = io(ENDPOINT);
 
 // !Console log TBR (To Be Removed)
