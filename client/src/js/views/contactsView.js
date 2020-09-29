@@ -52,6 +52,10 @@ export const renderContacts = ({ data, currentUserID }) => {
   });
 };
 
+export const renderNewContact = () => {
+  console.log("rendering new contact to the left haha")
+};
+
 // todo: render latest msg
 export const renderLatestMsg = (msg, currentUserID, contactSelectedID) => {
   const { msgContent, msgTime, receiverID, senderID, senderName } = msg;

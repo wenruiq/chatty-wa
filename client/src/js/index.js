@@ -234,6 +234,7 @@ const controlRemove = async hisID => {
       await state.remove.removeFriend();
       controlContacts();
       chatView.addCover();
+      state.contactSelected = null;
     } catch (err) {
       console.log(err);
     }
@@ -323,14 +324,19 @@ const controlSocket = async () => {
       console.log('%c Message received at socket:', 'color: green');
       console.log(msg);
       const contactSelectedID = state.contactSelected;
-      if (msg.senderID == contactSelectedID) {
-        chatView.renderMessage(msg, state.currentUser.id);
-        contactsView.renderLatestMsg(msg, myUserID, contactSelectedID);
+      const msgSenderID = msg.senderID;
+      const contactIDList = state.contacts.dataIDList;
+      if (!contactIDList.includes(msgSenderID)) {
+        // *This guy added me but my contacts not refreshed yet
+        controlContacts();
       } else {
-        contactsView.renderLatestMsg(msg, myUserID, contactSelectedID);
+        if (msg.senderID == contactSelectedID) {
+          chatView.renderMessage(msg, state.currentUser.id);
+          contactsView.renderLatestMsg(msg, myUserID, contactSelectedID);
+        } else {
+          contactsView.renderLatestMsg(msg, myUserID, contactSelectedID);
+        }
       }
-
-      // todo: check if this message is a from a new friend, if yes need render this contact.
     });
   }
 };

@@ -40,7 +40,8 @@ export const createUserDocument = async (userAuth, additionalData) => {
       displayName = additionalData.displayName;
     }
     if (!photoURL) {
-      photoURL = "https://user-images.githubusercontent.com/58852708/92991614-b8b2cd00-f517-11ea-8dba-90db328d2892.png";
+      photoURL =
+        'https://user-images.githubusercontent.com/58852708/92991614-b8b2cd00-f517-11ea-8dba-90db328d2892.png';
     }
     const nameChunks = displayName.split(' ');
     for (var chunk of nameChunks) {
@@ -71,6 +72,11 @@ export const createUserDocument = async (userAuth, additionalData) => {
 export const collectionToMapsArray = collectionSnapShot => {
   return collectionSnapShot.docs.map(doc => {
     return { contactID: doc.id, ...doc.data() };
+  });
+};
+export const collectionToContactIDList = collectionSnapShot => {
+  return collectionSnapShot.docs.map(doc => {
+    return doc.id;
   });
 };
 

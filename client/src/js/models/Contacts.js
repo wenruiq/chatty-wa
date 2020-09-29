@@ -1,4 +1,8 @@
-import { firestore, collectionToMapsArray } from '../firebase/firebase.utils';
+import {
+  firestore,
+  collectionToMapsArray,
+  collectionToContactIDList,
+} from '../firebase/firebase.utils';
 
 export default class Contacts {
   constructor(currentUserID) {
@@ -12,13 +16,14 @@ export default class Contacts {
     try {
       const collectionSnapShot = await contactsRef.get();
       this.data = collectionToMapsArray(collectionSnapShot);
+      this.dataIDList = collectionToContactIDList(collectionSnapShot);
     } catch (error) {
       console.error(error);
     }
   }
-  
-  async getContact(hisID){
-    const userRef = firestore.collection("users").doc(hisID);
+
+  async getContact(hisID) {
+    const userRef = firestore.collection('users').doc(hisID);
     try {
       const documentSnapShot = await userRef.get();
       return documentSnapShot.data();
