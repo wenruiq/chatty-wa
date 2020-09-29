@@ -20,10 +20,10 @@ export const removeCover = () => {
 };
 
 //* Remove cover after remove friend
-export const removeCoverAfterRemoveFriend = () => {
-  const cover = elements.chatColCover;
-  elements.chatCol.removeChild(elements.chatCol.childNodes[1]);
-}
+// export const removeCoverAfterRemoveFriend = () => {
+//   const cover = elements.chatColCover;
+//   elements.chatCol.removeChild(elements.chatCol.childNodes[1]);
+// }
 
 //* Add cover
 export const addCover = () => {

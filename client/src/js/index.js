@@ -210,7 +210,7 @@ elements.navColList.addEventListener('click', e => {
     if (state.contactSelected !== contactID) {
       state.contactSelected = contactID;
       controlChat(contactID);
-      chatView.removeCoverAfterRemoveFriend();
+      // chatView.removeCoverAfterRemoveFriend();
       // *Remove unread message badge
       if (
         document
@@ -233,7 +233,7 @@ const controlRemove = async hisID => {
     try {
       await state.remove.removeFriend();
       controlContacts();
-      chatView.addCover();
+      // chatView.addCover();
       state.contactSelected = null;
     } catch (err) {
       console.log(err);
