@@ -59,6 +59,7 @@ export const createUserDocument = async (userAuth, additionalData) => {
         createdAt,
         photoURL,
         searchTerms,
+        socketID: '',
         ...additionalData,
       });
     } catch (err) {
