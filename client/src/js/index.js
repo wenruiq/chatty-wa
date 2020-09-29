@@ -27,7 +27,7 @@ import * as chatView from './views/chatView';
 import Message from './models/Message';
 
 // *Initiate state
-const state = { contactSelected: null };
+const state = { contactSelected: null, latestMsgTime: null };
 // !Console log TBR (To Be Removed)
 console.log('%cCurrent state:', 'color:purple; font-weight: bold');
 console.log({ state });
@@ -163,7 +163,7 @@ const controlContacts = async () => {
     }
   }
   // *Trigger controlSocket here
-  controlSocket();
+  setTimeout(controlSocket, 3000);
 };
 
 // *Control chat
@@ -305,10 +305,10 @@ elements.sendMessageBtn.addEventListener('click', e => {
 
 // *Control socket
 const controlSocket = async () => {
+  console.log('controlling socket');
   // *Update firestore with my latest socketID (socket ID changes with page reload)
   if (state.currentUser) {
     const myUserID = state.currentUser.id;
-    await socket.id;
     state.socket = new Socket(myUserID, socket.id);
     try {
       await state.socket.updateSocketID();
@@ -327,15 +327,20 @@ const controlSocket = async () => {
       const contactSelectedID = state.contactSelected;
       const msgSenderID = msg.senderID;
       const contactIDList = state.contacts.dataIDList;
+      console.log(msg.msgTime);
       if (!contactIDList.includes(msgSenderID)) {
         // *This guy added me but my contacts not refreshed yet
         controlContacts();
       } else {
-        if (msg.senderID == contactSelectedID) {
-          chatView.renderMessage(msg, state.currentUser.id);
-          contactsView.renderLatestMsg(msg, myUserID, contactSelectedID);
-        } else {
-          contactsView.renderLatestMsg(msg, myUserID, contactSelectedID);
+        if (msg.msgTime != state.latestMsgTime) {
+          if (msg.senderID == contactSelectedID) {
+            chatView.renderMessage(msg, state.currentUser.id);
+            contactsView.renderLatestMsg(msg, myUserID, contactSelectedID);
+            state.latestMsgTime = msg.msgTime;
+          } else {
+            contactsView.renderLatestMsg(msg, myUserID, contactSelectedID);
+            state.latestMsgTime = msg.msgTime;
+          }
         }
       }
     });
@@ -351,7 +356,7 @@ auth.onAuthStateChanged(async userAuth => {
     // *Check if this was a sign up
     const displayName = localStorage.getItem('displayName');
     const isSignUp = localStorage.getItem('is-sign-up');
-    if (isSignUp == "1337") {
+    if (isSignUp == '1337') {
       // *Sign up process
       const userRef = await createUserDocument(userAuth, { displayName });
       localStorage.setItem('displayName', null);
