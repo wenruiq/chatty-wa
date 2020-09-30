@@ -44,6 +44,7 @@ export const createUserDocument = async (userAuth, additionalData) => {
         'https://user-images.githubusercontent.com/58852708/92991614-b8b2cd00-f517-11ea-8dba-90db328d2892.png';
     }
     const nameChunks = displayName.split(' ');
+    searchTerms.push(displayName.toLowerCase());
     for (var chunk of nameChunks) {
       searchTerms.push(chunk.toLowerCase());
       if (chunk.length > 3) {
