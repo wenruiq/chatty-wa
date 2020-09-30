@@ -18,12 +18,16 @@
 ## Table of Contents
 
 * [About the Project](#about-the-project)
-  * [Section Example](#section-example)
-  * [Contact Form](#contact-form)
-  * [Built With](#built-with)
+* [Built With](#built-with)
+* [Key Features](#key-features)
+  * [Sign In with google](#sign-in-with-google)
+  * [Add and Remove Friends](#add-and-remove-friends)
+  * [Instant Messaging](#instant-messaging)
 * [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-  * [Usage](#usage)
+  * [Client Usage](#client-usage)
+  * [Server Usage](#server-usage)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
@@ -39,22 +43,24 @@ Instant messaging is enabled using Socket.IO and Express
 
 The front end is built with JavaScript & Sass, and user data is stored in Google's Cloud Firestore
 
+## Built With
+* [Socket.IO](https://socket.io/)
+* [Firebase](https://firebase.google.com/)
+* [Express](https://expressjs.com/)
+* [Sass](https://sass-lang.com/)
+
 ## Key Features
-### Sign in with Goolge or sign up using email
+### Sign in with Google
 <img src="http://g.recordit.co/hn3VMaPqzB.gif" width="800px" /> 
 
-### Add or remove friends
+### Add and remove friends
 <img src="http://g.recordit.co/VeHrOmUmmS.gif" width="800px" /> 
 
 ### Instant messaging
 <img src="http://g.recordit.co/rBOzHz4Oz0.gif" width="800px"/>
 
 
-### Built With
-* [Socket.IO](https://socket.io/)
-* [Firebase](https://firebase.google.com/)
-* [Express](https://expressjs.com/)
-* [Sass](https://sass-lang.com/)
+
 
 ## Getting Started
 
@@ -78,7 +84,7 @@ git clone https://github.com/wenruiq/chatty-wa.git
 npm install
 ```
 
-### Usage (Client)
+### Client Usage
 1. Change directory to client folder
 ```sh
 cd client
@@ -95,7 +101,7 @@ npm run sass
 ```sh
 npm run build
 ```
-### Usage (Server)
+### Server Usage
 1. Before you run the server on your local machine, you need to change the ENDPOINT in the client-side code to match the local address
 
 <img src="http://g.recordit.co/RADRl5N7Y9.gif" width="700px" /> 
