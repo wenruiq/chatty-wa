@@ -102,7 +102,7 @@ npm run sass
 npm run build
 ```
 ### Server Usage
-1. Before you run the server on your local machine, you need to change the ENDPOINT in the client-side code to match the local address
+1. Before running the server on your local machine, change the ENDPOINT in the client-side code to match the address
 
 <img src="http://g.recordit.co/RADRl5N7Y9.gif" width="700px" /> 
 
@@ -110,7 +110,7 @@ npm run build
 ```sh
 cd server
 ```
-3. Run the server on the local machine (default is localhost:5000)
+3. Run the server (default address is localhost:5000)
 ```sh
 npm run start
 ```
