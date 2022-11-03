@@ -3,7 +3,7 @@
 <img src="http://g.recordit.co/rBOzHz4Oz0.gif" width="800px"/>
 <h3 align="center">Chatty</h3>
 <p align="center">
-  An instant message web app build with JavaScript, Firebase, Express & Socket.IO
+  An instant messaging web app built with JavaScript, Firebase, Express & Socket.IO
   </br>
   <a href="https://lucid-ptolemy-20dd8f.netlify.app/"><strong>View Demo »</strong></a>
   </br>
