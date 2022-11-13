@@ -5,7 +5,7 @@
 <p align="center">
   Real-time messaging web app built with JavaScript, Firebase, Express & Socket.IO
   </br>
-  <a href="https://lucid-ptolemy-20dd8f.netlify.app/"><strong>View Demo »</strong></a>
+  <a href="https://chatty-web.netlify.app"><strong>View Demo »</strong></a>
   </br>
   </br>
   <a href="https://github.com/wenruiq/chatty-wa">Explore the docs</a> · 
